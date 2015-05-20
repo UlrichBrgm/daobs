@@ -7,6 +7,7 @@ import org.apache.http.impl.client.BasicCredentialsProvider;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.solr.client.solrj.SolrServer;
+import org.apache.solr.client.solrj.impl.HttpSolrClient;
 import org.apache.solr.client.solrj.impl.HttpSolrServer;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.util.StringUtils;
@@ -21,7 +22,7 @@ public class SolrServerBean implements InitializingBean {
 
     private static SolrServerBean instance;
 
-    private SolrServer server;
+    private HttpSolrClient server;
     private String solrServerUrl;
     private String solrServerCore;
     private String solrServerUsername;
@@ -34,7 +35,7 @@ public class SolrServerBean implements InitializingBean {
      *
      * @return  The Solr server instance.
      */
-    public SolrServer getServer() throws Exception {
+    public HttpSolrClient getServer() throws Exception {
         if (!connectionChecked) {
             this.ping();
             connectionChecked = true;
@@ -42,7 +43,7 @@ public class SolrServerBean implements InitializingBean {
         return server;
     }
 
-    public SolrServerBean setServer(SolrServer server) {
+    public SolrServerBean setServer(HttpSolrClient server) {
         this.server = server;
         return this;
     }
@@ -62,9 +63,9 @@ public class SolrServerBean implements InitializingBean {
                         new UsernamePasswordCredentials(solrServerUsername, solrServerPassword));
                 CloseableHttpClient httpClient =
                         HttpClientBuilder.create().setDefaultCredentialsProvider(credentialsProvider).build();
-                server = new HttpSolrServer(this.solrServerUrl, httpClient);
+                server = new HttpSolrClient(this.solrServerUrl, httpClient);
             } else {
-                server = new HttpSolrServer(this.solrServerUrl);
+                server = new HttpSolrClient(this.solrServerUrl);
             }
 
             instance = this;

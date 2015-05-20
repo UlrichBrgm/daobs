@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE urlrewrite PUBLIC "-//tuckey.org//DTD UrlRewrite 4.0//EN"
+        "http://www.tuckey.org/res/dtds/urlrewrite4.0.dtd">
+<!--
+    Configuration file for UrlRewriteFilter
+    http://www.tuckey.org/urlrewrite/
+-->
+<urlrewrite>
+  <rule>
+    <note>
+    </note>
+    <from>^/solr/</from>
+    <to type="proxy">http://localhost:8983/solr/</to>
+  </rule>
+  <rule>
+    <note>
+    </note>
+    <from>^/data/</from>
+    <to type="proxy">http://localhost:8983/solr/data/</to>
+  </rule>
+  <rule>
+    <note>
+    </note>
+    <from>^/dashboard/</from>
+    <to type="proxy">http://localhost:8983/solr/dashboard/</to>
+  </rule>
+</urlrewrite>

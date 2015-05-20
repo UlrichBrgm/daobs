@@ -160,6 +160,18 @@
       </dependency>
 
       <dependency>
+        <groupId>commons-httpclient</groupId>
+        <artifactId>commons-httpclient</artifactId>
+        <version>${apache.commons}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>commons-codec</groupId>
+        <artifactId>commons-codec</artifactId>
+        <version>1.10</version>
+      </dependency>
+
+      <dependency>
         <groupId>org.daobs</groupId>
         <artifactId>daobs-routing-utility</artifactId>
         <version>${project.version}</version>
@@ -269,8 +281,9 @@
     This is used by all services requesting the
     Solr instance. eg. Harvesters. -->
     <webapp.protocol>http</webapp.protocol>
-    <webapp.port>8983</webapp.port>
+    <webapp.port>8982</webapp.port>
     <webapp.url>${webapp.protocol}://localhost:${webapp.port}</webapp.url>
+    <solr.url>http://localhost:8983</solr.url>
 
     <!-- Default username and password. This
     set the values in Spring security file and
@@ -281,11 +294,13 @@
 
     <data.dir>${project.basedir}/target/solr/WEB-INF/datadir</data.dir>
 
-    <solr.version>4.10.4</solr.version>
+    <solr.version>5.1.0</solr.version>
 
     <guava.version>17.0</guava.version>
 
     <tika.version>1.8</tika.version>
+
+    <apache.commons>3.1</apache.commons>
 
     <saxon.version>9.1.0.8</saxon.version>
     <saxon-dom.version>9.1.0.8</saxon-dom.version>
