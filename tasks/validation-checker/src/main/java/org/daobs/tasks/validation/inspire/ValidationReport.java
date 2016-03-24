@@ -56,6 +56,10 @@ public class ValidationReport {
         return completenessIndicator;
     }
 
+    public void setCompletenessIndicator(double completenessIndicator) {
+        this.completenessIndicator = completenessIndicator;
+    }
+
     private double completenessIndicator = -1;
     private double timeWaitingForResponseSeconds;
     private double totalTimeSeconds;
