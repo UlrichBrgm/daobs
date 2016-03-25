@@ -213,6 +213,23 @@
         <artifactId>maven-jar-plugin</artifactId>
         <version>2.6</version>
       </plugin>
+      <plugin>
+        <groupId>org.commonjava.maven.plugins</groupId>
+        <artifactId>directory-maven-plugin</artifactId>
+        <version>0.1</version>
+        <executions>
+          <execution>
+            <id>directories</id>
+            <goals>
+              <goal>highest-basedir</goal>
+            </goals>
+            <phase>initialize</phase>
+            <configuration>
+              <property>root.dir</property>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
     </plugins>
   </build>
 
@@ -275,7 +292,8 @@
     <webapp.port>8983</webapp.port>
     <webapp.url>${webapp.protocol}://localhost:${webapp.port}</webapp.url>
 
-    <data.dir>${project.basedir}/target/${war.name}/WEB-INF/datadir</data.dir>
+    <!-- root.dir set by directory-maven-plugin -->
+    <data.dir>${root.dir}/web/target/${war.name}/WEB-INF/datadir</data.dir>
 
     <!-- Default username and password. This
     set the values in Spring security file and
@@ -322,5 +340,25 @@
 
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
+
+  <profiles>
+    <!-- Use web profile to build the webapp -->
+    <profile>
+      <id>web</id>
+      <activation>
+        <activeByDefault>true</activeByDefault>
+      </activation>
+      <properties>
+        <config.properties.path>file:${data.dir}/config.properties</config.properties.path>
+      </properties>
+    </profile>
+    <!-- Use cli profile to run camel applications from command line -->
+    <profile>
+      <id>cli</id>
+      <properties>
+        <config.properties.path>/config.properties</config.properties.path>
+      </properties>
+    </profile>
+  </profiles>
 </project>
 
