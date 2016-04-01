@@ -1,3 +1,23 @@
+/**
+ * Copyright 2014-2016 European Environment Agency
+ *
+ * Licensed under the EUPL, Version 1.1 or – as soon
+ * they will be approved by the European Commission -
+ * subsequent versions of the EUPL (the "Licence");
+ * You may not use this work except in compliance
+ * with the Licence.
+ * You may obtain a copy of the Licence at:
+ *
+ * https://joinup.ec.europa.eu/community/eupl/og_page/eupl
+ *
+ * Unless required by applicable law or agreed to in
+ * writing, software distributed under the Licence is
+ * distributed on an "AS IS" basis,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND,
+ * either express or implied.
+ * See the Licence for the specific language governing
+ * permissions and limitations under the Licence.
+ */
 package org.daobs.tasks.validation.inspire;
 
 import org.springframework.util.StopWatch;
@@ -13,42 +33,22 @@ import java.util.regex.Pattern;
  */
 public class ValidationReport {
 
-    ValidationReport(double threshold) {
-        this.threshold = threshold;
-    }
-
+    private final Pattern completenessPattern = Pattern.compile("CompletenessIndicator>(.*)</.*:CompletenessIndicator");
     /**
      * The validation status.
      */
     boolean status;
-
-    public double getThreshold() {
-        return threshold;
-    }
-
-    public void setThreshold(double threshold) {
-        this.threshold = threshold;
-    }
-
     private double threshold = 100.0;
-
-    public boolean isAboveThreshold() {
-        return isAboveThreshold;
-    }
-
     private boolean isAboveThreshold;
-
     /**
      * HTTP status code
      */
     private int httpStatus;
-
     /**
      * Validation report. Could be an exception message
      * or an XML document depending on the validator.
      */
     private String report;
-
     private Date startTime;
     private Date endTime;
 
@@ -64,16 +64,33 @@ public class ValidationReport {
     private double timeWaitingForResponseSeconds;
     private double totalTimeSeconds;
     private StopWatch watch = new StopWatch();
-
     /**
      * URL of the validation report provided by the validator.
      */
     private String resultUrl;
-
     /**
      * Extra information provided by the validator.
      */
     private String info;
+    ValidationReport(double threshold) {
+        this.threshold = threshold;
+    }
+
+    public double getThreshold() {
+        return threshold;
+    }
+
+    public void setThreshold(double threshold) {
+        this.threshold = threshold;
+    }
+
+    public boolean isAboveThreshold() {
+        return isAboveThreshold;
+    }
+
+    public double getCompletenessIndicator() {
+        return completenessIndicator;
+    }
 
     public double getTimeWaitingForResponseSeconds() {
         return timeWaitingForResponseSeconds;
@@ -102,6 +119,7 @@ public class ValidationReport {
         this.timeWaitingForResponseSeconds = watch.getTotalTimeSeconds();
         return this;
     }
+
     public ValidationReport stop() {
         this.endTime = new Date();
         watch.stop();
@@ -117,6 +135,7 @@ public class ValidationReport {
         this.resultUrl = resultUrl;
         return this;
     }
+
     public String getInfo() {
         return info;
     }
@@ -147,8 +166,6 @@ public class ValidationReport {
         return report;
     }
 
-    private final Pattern completenessPattern = Pattern.compile("CompletenessIndicator>(.*)</.*:CompletenessIndicator");
-
     public ValidationReport setReport(String report) {
         this.report = report;
 
@@ -161,7 +178,7 @@ public class ValidationReport {
                 this.completenessIndicator = Double.parseDouble(completeness);
                 if (this.completenessIndicator >= 0) {
                     this.isAboveThreshold =
-                            this.completenessIndicator >= this.threshold;
+                        this.completenessIndicator >= this.threshold;
                 }
             }
         } catch (Exception e) {
