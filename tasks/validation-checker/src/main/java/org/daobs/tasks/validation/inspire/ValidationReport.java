@@ -52,9 +52,6 @@ public class ValidationReport {
     private Date startTime;
     private Date endTime;
 
-    public double getCompletenessIndicator() {
-        return completenessIndicator;
-    }
 
     public void setCompletenessIndicator(double completenessIndicator) {
         this.completenessIndicator = completenessIndicator;
