@@ -1,3 +1,23 @@
+/*
+ * Copyright 2014-2016 European Environment Agency
+ *
+ * Licensed under the EUPL, Version 1.1 or – as soon
+ * they will be approved by the European Commission -
+ * subsequent versions of the EUPL (the "Licence");
+ * You may not use this work except in compliance
+ * with the Licence.
+ * You may obtain a copy of the Licence at:
+ *
+ * https://joinup.ec.europa.eu/community/eupl/og_page/eupl
+ *
+ * Unless required by applicable law or agreed to in
+ * writing, software distributed under the Licence is
+ * distributed on an "AS IS" basis,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND,
+ * either express or implied.
+ * See the Licence for the specific language governing
+ * permissions and limitations under the Licence.
+ */
 (function () {
   "use strict";
   var app = angular.module('daobs');
@@ -5,10 +25,10 @@
   app.config(['$routeProvider', 'cfg',
     function ($routeProvider, cfg) {
       $routeProvider.when('/harvesting/:section', {
-        templateUrl : cfg.SERVICES.root +
+        templateUrl: cfg.SERVICES.root +
         'app/components/harvester/harvesterView.html'
       }).when('/harvesting/harvesting', {
-        templateUrl : cfg.SERVICES.root +
+        templateUrl: cfg.SERVICES.root +
         'app/components/harvester/harvesterView.html'
       });
     }]);
@@ -25,9 +45,9 @@
 
   app.controller('HarvesterConfigCtrl', [
     '$scope', '$routeParams', '$translate', '$timeout', '$http', '$location',
-    'harvesterService', 'cfg', 'Notification',
+    'harvesterService', 'cfg', 'Notification', 'cswService',
     function ($scope, $routeParams, $translate, $timeout, $http, $location,
-              harvesterService, cfg, Notification) {
+              harvesterService, cfg, Notification, cswService) {
       $scope.harvesterConfig = null;
       $scope.pollingInterval = '10s';
       $scope.adding = false;
@@ -50,16 +70,17 @@
         'harvesterStarted',
         'harvesterDeleted',
         'harvesterSaved',
+        'errorGettingRemoteHits',
         'errorAddingHarvester',
         'harvesterRecordsDeleted',
         'errorStartingHarvester',
         'eftValidationStarted',
-        'errorStartingEftValidation']).
-        then(function (translations) {
-          $scope.translations = translations;
-        });
+        'errorStartingEftValidation']).then(function (translations) {
+        $scope.translations = translations;
+      });
 
       $scope.statsForTerritory = {};
+      $scope.statsForRemote = {};
 
       function loadStatsForTerritory() {
         if ($location.path().indexOf('/harvesting/manage') === 0) {
@@ -74,13 +95,12 @@
               'q': '+documentType:metadata',
               'rows': '0',
               'wt': 'json',
-              'json.facet':
-                "{'top_territory': { " +
-                    "type: terms, field: harvesterUuid, " +
-                    "limit: " + $scope.harvesterConfig.length +
-                    ", missing: true," +
-                    "facet: {" + statsFieldConfig.join(',') +
-                "}}}"
+              'json.facet': "{'top_territory': { " +
+              "type: terms, field: harvesterUuid, " +
+              "limit: " + $scope.harvesterConfig.length +
+              ", missing: true," +
+              "facet: {" + statsFieldConfig.join(',') +
+              "}}}"
             })
           ).then(function (data) {
             if (data.data.facets.top_territory && data.data.facets.top_territory.buckets) {
@@ -105,6 +125,30 @@
         });
       }
 
+      $scope.getHitsNumber = function (h) {
+        if (h) {
+          getHitsNumber(h);
+        } else {
+          angular.forEach($scope.harvesterConfig, function (h) {
+            getHitsNumber(h);
+          });
+        }
+      };
+      function getHitsNumber (h) {
+        $scope.statsForRemote[h.uuid] = {};
+        cswService.getHitsNumber(h.url, h.filter).then(function (nbHits) {
+          $scope.statsForRemote[h.uuid] = {
+            count: nbHits,
+            when: new Date()
+          };
+        }, function (response) {
+          Notification.error(
+            $scope.translations.errorGettingRemoteHits + ' ' +
+            response.data + ' (' + response.status + ').');
+          console.log(response);
+        });
+      };
+
       $scope.edit = function (h) {
         $scope.adding = true;
         $scope.newHarvester = h;
@@ -117,7 +161,7 @@
           Notification.success($scope.translations.harvesterSaved);
           init();
           $scope.newHarvester = $scope.harvesterTpl;
-        }, function(response) {
+        }, function (response) {
           console.error(response);
           Notification.error(
             $scope.translations.errorAddingHarvester + ' ' +
@@ -126,9 +170,9 @@
       };
 
       $scope.run = function (h) {
-        harvesterService.run(h).then(function() {
+        harvesterService.run(h).then(function () {
           Notification.success($scope.translations.harvesterStarted);
-        }, function(response) {
+        }, function (response) {
           console.error(response);
           Notification.error(
             $scope.translations.errorStartingHarvester + ' ' +

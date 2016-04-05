@@ -1,3 +1,14 @@
+/**
+ * Copyright 2014-2016 European Environment Agency <p> Licensed under the EUPL, Version 1.1 or – as
+ * soon they will be approved by the European Commission - subsequent versions of the EUPL (the
+ * "Licence"); You may not use this work except in compliance with the Licence. You may obtain a
+ * copy of the Licence at: <p> https://joinup.ec.europa.eu/community/eupl/og_page/eupl <p> Unless
+ * required by applicable law or agreed to in writing, software distributed under the Licence is
+ * distributed on an "AS IS" basis, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or
+ * implied. See the Licence for the specific language governing permissions and limitations under
+ * the Licence.
+ */
+
 package org.daobs.tasks.validation.inspire;
 
 import org.springframework.util.StopWatch;
@@ -7,172 +18,180 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- * Validation report
- *
+ * Validation report.
  * Created by francois on 08/12/14.
  */
 public class ValidationReport {
 
-    ValidationReport(double threshold) {
-        this.threshold = threshold;
-    }
+  private final Pattern completenessPattern =
+      Pattern.compile("CompletenessIndicator>(.*)</.*:CompletenessIndicator");
+  /**
+   * The validation status.
+   */
+  boolean status;
+  private double threshold = 100.0;
+  private boolean isAboveThreshold;
+  /**
+   * HTTP status code.
+   */
+  private int httpStatus;
+  /**
+   * Validation report. Could be an exception message
+   * or an XML document depending on the validator.
+   */
+  private String report;
+  private Date startTime;
+  private Date endTime;
+  private double completenessIndicator = -1;
+  private double timeWaitingForResponseSeconds;
+  private double totalTimeSeconds;
+  private StopWatch watch = new StopWatch();
+  /**
+   * URL of the validation report provided by the validator.
+   */
+  private String resultUrl;
+  /**
+   * Extra information provided by the validator.
+   */
+  private String info;
 
-    /**
-     * The validation status.
+  ValidationReport(double threshold) {
+    this.threshold = threshold;
+  }
+
+  public double getThreshold() {
+    return threshold;
+  }
+
+  public void setThreshold(double threshold) {
+    this.threshold = threshold;
+  }
+
+  public boolean isAboveThreshold() {
+    return isAboveThreshold;
+  }
+
+  public double getCompletenessIndicator() {
+    return completenessIndicator;
+  }
+
+  public double getTimeWaitingForResponseSeconds() {
+    return timeWaitingForResponseSeconds;
+  }
+
+  public double getTotalTimeSeconds() {
+    return totalTimeSeconds;
+  }
+
+  public boolean getStatus() {
+    return status;
+  }
+
+  public ValidationReport setStatus(boolean status) {
+    this.status = status;
+    return this;
+  }
+
+  /**
+   * Set start date.
      */
-    boolean status;
+  public ValidationReport start() {
+    this.startTime = new Date();
+    watch.start();
+    return this;
+  }
 
-    public double getThreshold() {
-        return threshold;
-    }
+  public ValidationReport gotResponse() {
+    this.timeWaitingForResponseSeconds = watch.getTotalTimeSeconds();
+    return this;
+  }
 
-    public void setThreshold(double threshold) {
-        this.threshold = threshold;
-    }
+  /**
+   * Set ending time.
+   */
+  public ValidationReport stop() {
+    this.endTime = new Date();
+    watch.stop();
+    this.totalTimeSeconds = watch.getTotalTimeSeconds();
+    return this;
+  }
 
-    private double threshold = 100.0;
+  public String getResultUrl() {
+    return resultUrl;
+  }
 
-    public boolean isAboveThreshold() {
-        return isAboveThreshold;
-    }
+  public ValidationReport setResultUrl(String resultUrl) {
+    this.resultUrl = resultUrl;
+    return this;
+  }
 
-    private boolean isAboveThreshold;
+  public String getInfo() {
+    return info;
+  }
 
-    /**
-     * HTTP status code
+  public ValidationReport setInfo(String info) {
+    this.info = info;
+    return this;
+  }
+
+  public Date getStartTime() {
+    return new Date(startTime.getTime());
+  }
+
+  public Date getEndTime() {
+    return new Date(endTime.getTime());
+  }
+
+  public int getHttpStatus() {
+    return httpStatus;
+  }
+
+  public ValidationReport setHttpStatus(int httpStatus) {
+    this.httpStatus = httpStatus;
+    return this;
+  }
+
+  /**
+   * Get report.
+   */
+  public String getReport() {
+    return report;
+  }
+
+  /**
+   * Set report.
      */
-    private int httpStatus;
+  public ValidationReport setReport(String report) {
+    this.report = report;
 
-    /**
-     * Validation report. Could be an exception message
-     * or an XML document depending on the validator.
-     */
-    private String report;
-
-    private Date startTime;
-    private Date endTime;
-
-    public double getCompletenessIndicator() {
-        return completenessIndicator;
-    }
-
-    private double completenessIndicator = -1;
-    private double timeWaitingForResponseSeconds;
-    private double totalTimeSeconds;
-    private StopWatch watch = new StopWatch();
-
-    /**
-     * URL of the validation report provided by the validator.
-     */
-    private String resultUrl;
-
-    /**
-     * Extra information provided by the validator.
-     */
-    private String info;
-
-    public double getTimeWaitingForResponseSeconds() {
-        return timeWaitingForResponseSeconds;
-    }
-
-    public double getTotalTimeSeconds() {
-        return totalTimeSeconds;
-    }
-
-    public boolean getStatus() {
-        return status;
-    }
-
-    public ValidationReport setStatus(boolean status) {
-        this.status = status;
-        return this;
-    }
-
-    public ValidationReport start() {
-        this.startTime = new Date();
-        watch.start();
-        return this;
-    }
-
-    public ValidationReport gotResponse() {
-        this.timeWaitingForResponseSeconds = watch.getTotalTimeSeconds();
-        return this;
-    }
-    public ValidationReport stop() {
-        this.endTime = new Date();
-        watch.stop();
-        this.totalTimeSeconds = watch.getTotalTimeSeconds();
-        return this;
-    }
-
-    public String getResultUrl() {
-        return resultUrl;
-    }
-
-    public ValidationReport setResultUrl(String resultUrl) {
-        this.resultUrl = resultUrl;
-        return this;
-    }
-    public String getInfo() {
-        return info;
-    }
-
-    public ValidationReport setInfo(String info) {
-        this.info = info;
-        return this;
-    }
-
-    public Date getStartTime() {
-        return startTime;
-    }
-
-    public Date getEndTime() {
-        return endTime;
-    }
-
-    public int getHTTPStatus() {
-        return httpStatus;
-    }
-
-    public ValidationReport setHTTPStatus(int httpStatus) {
-        this.httpStatus = httpStatus;
-        return this;
-    }
-
-    public String getReport() {
-        return report;
-    }
-
-    private final Pattern completenessPattern = Pattern.compile("CompletenessIndicator>(.*)</.*:CompletenessIndicator");
-
-    public ValidationReport setReport(String report) {
-        this.report = report;
-
-        // Quick hack to retrieve completeness indicator
-        // Xpath may be better
-        try {
-            Matcher matcher = completenessPattern.matcher(report);
-            if (matcher.find()) {
-                String completeness = matcher.group(1);
-                this.completenessIndicator = Double.parseDouble(completeness);
-                if (this.completenessIndicator >= 0) {
-                    this.isAboveThreshold =
-                            this.completenessIndicator >= this.threshold;
-                }
-            }
-        } catch (Exception e) {
-            setInfo(getInfo() + ". Exception" + e.getMessage());
+    // Quick hack to retrieve completeness indicator
+    // Xpath may be better
+    try {
+      Matcher matcher = completenessPattern.matcher(report);
+      if (matcher.find()) {
+        String completeness = matcher.group(1);
+        this.completenessIndicator = Double.parseDouble(completeness);
+        if (this.completenessIndicator >= 0) {
+          this.isAboveThreshold =
+            this.completenessIndicator >= this.threshold;
         }
-        return this;
+      }
+    } catch (Exception exception) {
+      setInfo(getInfo() + ". Exception" + exception.getMessage());
     }
+    return this;
+  }
 
-    public String toString() {
-        StringBuffer buffer = new StringBuffer("Validation report:");
-        buffer.append("\nInfo: ").append(this.getInfo());
-        buffer.append("\nTotal time: ").append(this.getTotalTimeSeconds());
-        buffer.append("\nCompleteness : ").append(this.getCompletenessIndicator());
-        buffer.append("\nResult URL: ").append(this.getResultUrl());
-        buffer.append("\nReport: ").append(this.getReport());
-        return buffer.toString();
-    }
+  /**
+   * As string.
+   */
+  public String toString() {
+    StringBuffer buffer = new StringBuffer("Validation report:");
+    buffer.append("\nInfo: ").append(this.getInfo());
+    buffer.append("\nTotal time: ").append(this.getTotalTimeSeconds());
+    buffer.append("\nCompleteness : ").append(this.getCompletenessIndicator());
+    buffer.append("\nResult URL: ").append(this.getResultUrl());
+    buffer.append("\nReport: ").append(this.getReport());
+    return buffer.toString();
+  }
 }

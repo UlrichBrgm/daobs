@@ -1,3 +1,13 @@
+/**
+ * Copyright 2014-2016 European Environment Agency <p> Licensed under the EUPL, Version 1.1 or – as
+ * soon they will be approved by the European Commission - subsequent versions of the EUPL (the
+ * "Licence"); You may not use this work except in compliance with the Licence. You may obtain a
+ * copy of the Licence at: <p> https://joinup.ec.europa.eu/community/eupl/og_page/eupl <p> Unless
+ * required by applicable law or agreed to in writing, software distributed under the Licence is
+ * distributed on an "AS IS" basis, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or
+ * implied. See the Licence for the specific language governing permissions and limitations under
+ * the Licence.
+ */
 
 package org.daobs.indicator.config;
 
@@ -10,9 +20,9 @@ import javax.xml.bind.annotation.XmlType;
 
 /**
  * <p>Java class for anonymous complex type.
- * 
+ *
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ *
  * <pre>
  * &lt;complexType>
  *   &lt;complexContent>
@@ -26,95 +36,95 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
+ *
+ *
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "title",
-    "author",
-    "url"
+  "title",
+  "author",
+  "url"
 })
 @XmlRootElement(name = "identification", namespace = "http://daobs.org")
 public class Identification {
 
-    @XmlElement(namespace = "http://daobs.org", required = true)
-    protected Title title;
-    @XmlElement(namespace = "http://daobs.org")
-    protected String author;
-    @XmlElement(namespace = "http://daobs.org")
-    protected String url;
+  @XmlElement(namespace = "http://daobs.org", required = true)
+  protected Title title;
+  @XmlElement(namespace = "http://daobs.org")
+  protected String author;
+  @XmlElement(namespace = "http://daobs.org")
+  protected String url;
 
-    /**
-     * Gets the value of the title property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Title }
-     *     
-     */
-    public Title getTitle() {
-        return title;
-    }
+  /**
+   * Gets the value of the title property.
+   *
+   * @return
+   *     possible object is
+   *     {@link Title }
+   *
+   */
+  public Title getTitle() {
+    return title;
+  }
 
-    /**
-     * Sets the value of the title property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Title }
-     *     
-     */
-    public void setTitle(Title value) {
-        this.title = value;
-    }
+  /**
+   * Sets the value of the title property.
+   *
+   * @param value
+   *     allowed object is
+   *     {@link Title }
+   *
+   */
+  public void setTitle(Title value) {
+    this.title = value;
+  }
 
-    /**
-     * Gets the value of the author property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
-    public String getAuthor() {
-        return author;
-    }
+  /**
+   * Gets the value of the author property.
+   *
+   * @return
+   *     possible object is
+   *     {@link String }
+   *
+   */
+  public String getAuthor() {
+    return author;
+  }
 
-    /**
-     * Sets the value of the author property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setAuthor(String value) {
-        this.author = value;
-    }
+  /**
+   * Sets the value of the author property.
+   *
+   * @param value
+   *     allowed object is
+   *     {@link String }
+   *
+   */
+  public void setAuthor(String value) {
+    this.author = value;
+  }
 
-    /**
-     * Gets the value of the url property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
-    public String getUrl() {
-        return url;
-    }
+  /**
+   * Gets the value of the url property.
+   *
+   * @return
+   *     possible object is
+   *     {@link String }
+   *
+   */
+  public String getUrl() {
+    return url;
+  }
 
-    /**
-     * Sets the value of the url property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setUrl(String value) {
-        this.url = value;
-    }
+  /**
+   * Sets the value of the url property.
+   *
+   * @param value
+   *     allowed object is
+   *     {@link String }
+   *
+   */
+  public void setUrl(String value) {
+    this.url = value;
+  }
 
 }

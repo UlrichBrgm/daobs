@@ -8,8 +8,8 @@
     <br/>
     <!-- Check for FormData API -->
     <form
-          class="form"
-          role="form">
+      class="form"
+      role="form">
       <div class="form-group" data-file-drop-zone="monitoringFiles">
         <label for="ds-report-upload"
                class="control-label"
@@ -19,7 +19,9 @@
                multiple="multiple"
                type="file"/>
         <ul>
-          <li data-ng-repeat="file in monitoringFiles">{{file.name}} ({{file.type}})</li>
+          <li data-ng-repeat="file in monitoringFiles">{{file.name}}
+            ({{file.type}})
+          </li>
         </ul>
         <p class="help-block"
            data-translate="">monitoringFileHelp</p>
@@ -44,9 +46,9 @@
       </div>
 
       <button class="btn btn-primary"
-              data-ng-disabled="monitoringFiles === undefined || isSubmitting"
+              data-ng-disabled="monitoringFiles.length < 1 || monitoringFiles === undefined || isSubmitting"
               data-ng-click="uploadMonitoring()">
-        <i class="glyphicon glyphicon-upload"></i>&nbsp;
+        <i class="fa fa-upload"></i>&nbsp;
         <span data-translate="">submitMonitoring</span>
         <span data-ng-show="isSubmitting">
           {{responseMessages.length}} / {{monitoringFiles.length}}
@@ -55,8 +57,9 @@
 
       <button class="btn btn-default"
               type="reset"
+              data-ng-disabled="monitoringFiles.length < 1"
               data-ng-click="monitoringFiles = []">
-        <i class="glyphicon glyphicon-remove"></i>
+        <i class="fa fa-remove"></i>
       </button>
     </form>
     <br/>

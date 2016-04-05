@@ -3,7 +3,8 @@
     <br/>
     <p class="alert alert-info"
        data-translate=""
-       data-translate-values="{pollingInterval: '{{pollingInterval}}'}">harvesterConfigPage</p>
+       data-translate-values="{pollingInterval: '{{pollingInterval}}'}">
+      harvesterConfigPage</p>
   </div>
   <div class="col-md-10">
     <br/>
@@ -12,17 +13,34 @@
       <tr>
         <th data-translate="">territory</th>
         <th data-translate="">name</th>
-        <th data-translate="">details</th>
-        <th/>
-        <th/>
         <th>
+          <span data-translate="">details</span>
 
-          <button class="btn btn-link"
-                  data-ng-hide="adding"
-                  data-ng-click="adding = true"
-                  title="{{'add' | translate}}">
-            <i class="glyphicon glyphicon-plus"></i>
-          </button>
+          <div class="btn-group pull-right" role="group">
+            <button class="btn btn-default"
+                    data-ng-hide="adding"
+                    data-ng-click="adding = true"
+                    title="{{'add' | translate}}">
+              <i class="fa fa-plus"></i>
+            </button>
+            <div class="btn-group">
+              <button type="button"
+                      class="btn btn-default dropdown-toggle"
+                      data-toggle="dropdown" aria-expanded="false"
+                      title="">
+                &nbsp;<span class="caret"></span>
+              </button>
+              <ul class="dropdown-menu dropdown-menu-right" role="menu">
+                <li>
+                  <a href=""
+                     data-ng-click="getHitsNumber()">
+                    <i class="fa fa-calculator"/>&nbsp;
+                    <span data-translate="">getHitsNumber</span>
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
         </th>
       </tr>
 
@@ -33,7 +51,8 @@
         </td>
         <td>
           <form class="form-horizontal">
-            <div class="form-group" data-ng-repeat="(key, value) in harvesterTpl">
+            <div class="form-group"
+                 data-ng-repeat="(key, value) in harvesterTpl">
               <label for="field-{{key}}"
                      class="col-sm-4 control-label">
                 {{key | translate}}</label>
@@ -57,13 +76,13 @@
               <div class="col-sm-offset-2 col-sm-10">
                 <button type="submit" class="btn btn-default"
                         data-ng-click="adding = false">
-                  <i class="glyphicon glyphicon-remove"/>&nbsp;
+                  <i class="fa fa-remove"/>&nbsp;
                   <span data-translate="">cancel</span>
                 </button>
 
                 <button type="submit" class="btn btn-primary"
                         data-ng-click="add(h)">
-                  <i class="glyphicon glyphicon-save"/>&nbsp;
+                  <i class="fa fa-save"/>&nbsp;
                   <span data-translate="">saveHarvester</span>
                 </button>
               </div>
@@ -84,7 +103,8 @@
                  placeholder="{{'filter'}}">
         </td>
       </tr>
-      <tr data-ng-repeat="h in harvesterConfig | filter:harvesterSearch | orderBy:'territory'">
+      <tr
+        data-ng-repeat="h in harvesterConfig | filter:harvesterSearch | orderBy:'territory'">
         <td>
           <h1>{{h.territory}}</h1>
         </td>
@@ -94,6 +114,14 @@
               {{statsForTerritory[h.uuid].count}}
               <span data-translate="">records</span>
             </strong>
+          </small>
+          <small data-ng-show="statsForTerritory[h.uuid] && statsForRemote[h.uuid].count">&nbsp;/&nbsp;</small>
+          <small data-ng-show="statsForRemote[h.uuid].count"
+                 title="{{statsForRemote[h.uuid].when | date:'M/d/yyyy HH:mm:ss'}}">
+            <span>
+              {{statsForRemote[h.uuid].count}}
+              <span data-translate="">recordsInRemote</span>
+            </span>
           </small>
           <small data-ng-repeat="(key, value) in statsForTerritory[h.uuid]"
                  data-ng-if="key !== 'count' && key !== 'val'">
@@ -121,21 +149,22 @@
                     class="btn btn-default"
                     data-ng-click="edit(h)"
                     title="{{'configure' | translate}}">
-              <i class="glyphicon glyphicon-edit"></i>&nbsp;
+              <i class="fa fa-edit"></i>&nbsp;
               <span data-translate="">configure</span>
             </button>
             <button data-ng-click="run(h)"
                     class="btn btn-default"
                     role="button"
                     title="{{'harvest' | translate}}">
-              <i class="glyphicon glyphicon-play"></i>&nbsp;
+              <i class="fa fa-play"></i>&nbsp;
               <span data-translate="">harvest</span>
             </button>
             <div class="btn-group" role="group">
               <button class="btn btn-default dropdown-toggle" type="button"
-                      data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"
+                      data-toggle="dropdown" aria-haspopup="true"
+                      aria-expanded="true"
                       title="{{'actions' | translate}}">
-                <i class="glyphicon glyphicon-cog"/>
+                <i class="fa fa-cog"/>
                 <span class="caret"></span>
               </button>
               <ul class="dropdown-menu">
@@ -144,15 +173,22 @@
                      title="{{'viewRecords' | translate}}"
                      data-ng-show="statsForTerritory[h.uuid].count > 0"
                      data-ng-href="dashboard2/#/dashboard/solr/Statistics%20(with%20record%20details)?q=%2BharvesterUuid:{{h.uuid}}">
-                    <i class="glyphicon glyphicon-eye-open"></i>&nbsp;
+                    <i class="fa fa-eye"></i>&nbsp;
                     <span data-translate="">viewRecords</span>
+                  </a>
+                </li>
+                <li>
+                  <a role="button"
+                     data-ng-click="getHitsNumber(h)">
+                    <i class="fa fa-calculator"></i>&nbsp;
+                    <span data-translate="">getHitsNumber</span>
                   </a>
                 </li>
                 <li>
                   <a role="button"
                      data-ng-click="remove(h)"
                      title="{{'remove' | translate}}">
-                    <i class="glyphicon glyphicon-remove text-danger"></i>&nbsp;
+                    <i class="fa fa-remove text-danger"></i>&nbsp;
                     <span data-translate="">removeHarvester</span>
                   </a>
                 </li>
@@ -162,7 +198,8 @@
                      data-ng-click="removeRecords(h)"
                      data-ng-show="statsForTerritory[h.uuid].count > 0"
                      title="{{'removeRecords' | translate}}">
-                    <i class="glyphicon glyphicon-floppy-remove text-danger"></i>&nbsp;
+                    <i
+                      class="fa fa-remove text-danger"></i>&nbsp;
                     <span data-translate="">removeRecords</span>
                   </a>
                 </li>
@@ -175,7 +212,7 @@
                      data-ng-click="eftValidation(h, true)"
                      data-ng-show="statsForTerritory[h.uuid].count > 0"
                      title="{{'restartEtfAll' | translate}}">
-                    <i class="glyphicon glyphicon-fw"></i>&nbsp;
+                    <i class="fa fa-fw"></i>&nbsp;
                     <span data-translate="">restartEtfAll</span>
                   </a>
                 </li>
@@ -184,7 +221,7 @@
                      data-ng-click="eftValidation(h, false)"
                      data-ng-show="statsForTerritory[h.uuid].count > 0"
                      title="{{'restartEtfMissing' | translate}}">
-                    <i class="glyphicon glyphicon-fw"></i>&nbsp;
+                    <i class="fa fa-fw"></i>&nbsp;
                     <span data-translate="">restartEtfMissing</span>
                   </a>
                 </li>
