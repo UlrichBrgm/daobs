@@ -247,6 +247,32 @@
       </dependency>
 
       <dependency>
+        <groupId>commons-httpclient</groupId>
+        <artifactId>commons-httpclient</artifactId>
+        <version>3.1</version>
+      </dependency>
+      <dependency>
+        <groupId>commons-codec</groupId>
+        <artifactId>commons-codec</artifactId>
+        <version>1.9</version>
+      </dependency>
+      <dependency>
+        <groupId>commons-io</groupId>
+        <artifactId>commons-io</artifactId>
+        <version>2.4</version>
+      </dependency>
+      <dependency>
+        <groupId>commons-lang</groupId>
+        <artifactId>commons-lang</artifactId>
+        <version>2.6</version>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.httpcomponents</groupId>
+        <artifactId>httpclient</artifactId>
+        <version>4.5.2</version>
+      </dependency>
+
+      <dependency>
         <groupId>org.daobs</groupId>
         <artifactId>daobs-routing-utility</artifactId>
         <version>${project.version}</version>
@@ -267,13 +293,13 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-compiler-plugin</artifactId>
-        <version>2.5.1</version>
+        <version>3.5.1</version>
         <configuration>
           <source>${java.version}</source>
           <target>${java.version}</target>
           <debug>true</debug>
           <encoding>UTF-8</encoding>
-          <compilerArgument>-proc:none</compilerArgument> <!-- disable automatic annotation processing accoring to: http://docs.jboss.org/hibernate/jpamodelgen/1.0/reference/en-US/html_single/#d0e261 -->
+          <compilerArgument>-proc:none</compilerArgument>
         </configuration>
       </plugin>
       <plugin>
@@ -328,21 +354,59 @@
         <artifactId>license-maven-plugin</artifactId>
         <version>1.8</version>
       </plugin>-->
+
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>findbugs-maven-plugin</artifactId>
+        <version>3.0.3</version>
+        <executions>
+          <execution>
+            <id>findbugs</id>
+            <goals>
+              <goal>findbugs</goal>
+            </goals>
+            <phase>test</phase>
+          </execution>
+        </executions>
+        <configuration>
+          <xmlOutput>true</xmlOutput>
+          <xmlOutputDirectory>target/site</xmlOutputDirectory>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-checkstyle-plugin</artifactId>
+        <version>2.17</version>
+        <dependencies>
+          <dependency>
+            <groupId>com.puppycrawl.tools</groupId>
+            <artifactId>checkstyle</artifactId>
+            <version>6.17</version>
+          </dependency>
+        </dependencies>
+        <executions>
+          <execution>
+            <id>check</id>
+            <goals>
+              <goal>check</goal>
+            </goals>
+            <phase>test</phase>
+          </execution>
+        </executions>
+        <configuration>
+          <configLocation>checkstyle.xml</configLocation>
+          <suppressionsLocation>checkstyle-suppressions.xml</suppressionsLocation>
+          <logViolationsToConsole>true</logViolationsToConsole>
+          <maxAllowedViolations>0</maxAllowedViolations>
+          <violationSeverity>warning</violationSeverity>
+          <encoding>UTF-8</encoding>
+        </configuration>
+      </plugin>
     </plugins>
   </build>
 
   <reporting>
     <plugins>
-      <plugin>
-        <groupId>org.codehaus.mojo</groupId>
-        <artifactId>findbugs-maven-plugin</artifactId>
-        <version>2.5.5</version>
-      </plugin>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-checkstyle-plugin</artifactId>
-        <version>2.10</version>
-      </plugin>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-site-plugin</artifactId>
@@ -369,6 +433,7 @@
     <module>web</module>
     <module>messaging</module>
     <module>reporting</module>
+    <module>http-proxy</module>
   </modules>
 
 
@@ -433,14 +498,14 @@
     <posgresql.version>9.1-901.jdbc4</posgresql.version>
     <commons-dbcp.version>1.4</commons-dbcp.version>
 
-    <camel.version>2.16.1</camel.version>
+    <camel.version>2.17.0</camel.version>
 
     <!--<jms.url>tcp://localhost:61616</jms.url>-->
     <jms.url>vm://internaljmschannel</jms.url>
     <activemq.version>5.6.0</activemq.version>
     <xbean.version>3.18</xbean.version>
 
-    <java.version>1.7</java.version>
+    <java.version>1.8</java.version>
 
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>

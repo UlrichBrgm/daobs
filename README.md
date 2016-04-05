@@ -1,4 +1,8 @@
 
+
+[![Build Status](https://travis-ci.org/INSPIRE-MIF/daobs.svg?branch=daobs-1.0.x)](https://travis-ci.org/INSPIRE-MIF/daobs)
+
+
 # Overview
 
 Collect information and configure indicators to generate reporting. Build dashboards 
@@ -31,7 +35,7 @@ The guide for user installing and configuring the application.
 ## Requirements
 
 * Git
-* Java 7
+* Java 8
 * Maven 3.1.0+
 * Solr 5.x
 * A modern web browser. The latest version of Chrome and Firefox have been tested to work. Safari also works, except for the "Export to File" feature for saving dashboards. We recommend that you use Chrome or Firefox while building dashboards. IE10+ should be also supported.
