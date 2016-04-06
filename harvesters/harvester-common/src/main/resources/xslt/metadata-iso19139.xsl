@@ -720,7 +720,7 @@
           </field>
 
           <xsl:if test="$operatesOnSetByProtocol and normalize-space($protocol) != ''">
-            <xsl:if test="daobs:compare($protocol, 'wms')">
+            <xsl:if test="daobs:contains($protocol, 'wms')">
               <field name="recordOperatedByType">view</field>
             </xsl:if>
             <xsl:if test="daobs:contains($protocol, 'wfs') or
