@@ -374,8 +374,8 @@
       <cm:multicast stopOnException="false"
                     parallelProcessing="false">
         <cm:to uri="activemq:queue:task-analyze?jmsMessageType=Text"/>
-        <cm:to uri="activemq:queue:task-validate?jmsMessageType=Text"/>
-        <!--<cm:to uri="activemq:queue:task-db-validate?jmsMessageType=Text"/>-->
+        <!--<cm:to uri="activemq:queue:task-validate?jmsMessageType=Text"/>-->
+        <cm:to uri="activemq:queue:task-db-validate?jmsMessageType=Text"/>
         <!--<cm:to uri="activemq:queue:etf-task-validate?jmsMessageType=Text"/>-->
       </cm:multicast>
     </cm:route>
