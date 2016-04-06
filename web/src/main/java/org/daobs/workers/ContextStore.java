@@ -18,6 +18,7 @@
  * See the Licence for the specific language governing
  * permissions and limitations under the Licence.
  */
+
 package org.daobs.workers;
 
 import org.apache.camel.CamelContext;

@@ -18,9 +18,13 @@
  * See the Licence for the specific language governing
  * permissions and limitations under the Licence.
  */
+
 package org.daobs.tasks.validation.inspire;
 
 import junit.framework.TestCase;
+
+import org.junit.Ignore;
+import org.springframework.context.annotation.Import;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
@@ -37,6 +41,7 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.Properties;
 
+@Ignore
 public class DbValidatorClientTest extends TestCase {
 
     /**
