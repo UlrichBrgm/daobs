@@ -18,8 +18,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- * Validation report.
- * Created by francois on 08/12/14.
+ * Validation report. Created by francois on 08/12/14.
  */
 public class ValidationReport {
 
@@ -36,8 +35,8 @@ public class ValidationReport {
    */
   private int httpStatus;
   /**
-   * Validation report. Could be an exception message
-   * or an XML document depending on the validator.
+   * Validation report. Could be an exception message or an XML document depending on the
+   * validator.
    */
   private String report;
   private Date startTime;
@@ -75,6 +74,11 @@ public class ValidationReport {
     return completenessIndicator;
   }
 
+  public ValidationReport setCompletenessIndicator(double completenessIndicator) {
+    this.completenessIndicator = completenessIndicator;
+    return this;
+  }
+
   public double getTimeWaitingForResponseSeconds() {
     return timeWaitingForResponseSeconds;
   }
@@ -94,7 +98,7 @@ public class ValidationReport {
 
   /**
    * Set start date.
-     */
+   */
   public ValidationReport start() {
     this.startTime = new Date();
     watch.start();
@@ -160,7 +164,7 @@ public class ValidationReport {
 
   /**
    * Set report.
-     */
+   */
   public ValidationReport setReport(String report) {
     this.report = report;
 

@@ -37,7 +37,7 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.Properties;
 
-public class DBValidatorClientTest extends TestCase {
+public class DbValidatorClientTest extends TestCase {
 
     /**
      * Propeties from "config.properties" file
@@ -46,7 +46,7 @@ public class DBValidatorClientTest extends TestCase {
     /**
      * Postgres database service validator client
      */
-    private DBValidatorClient validator;
+    private DbValidatorClient validator;
     /**
      * Jdbc template to get metatadas uuids for tests
      */
@@ -95,7 +95,7 @@ public class DBValidatorClientTest extends TestCase {
         super.setUp();
         this.props = loadProperties();
         DataSource dataSource = getDataSource();
-        this.validator = new DBValidatorClient(dataSource,
+        this.validator = new DbValidatorClient(dataSource,
                 props.getProperty("task.db-validation-checker.db.validRuleResult"),
                 props.getProperty("task.db-validation-checker.db.sql.selectMetadataValidationResultQuery"));
         this.template = new JdbcTemplate(dataSource);

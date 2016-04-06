@@ -21,8 +21,6 @@
     permissions and limitations under the Licence.
 
 -->
-<!-- Configures the cm Context-->
-
 <beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:cm="http://camel.apache.org/schema/spring"
        xmlns="http://www.springframework.org/schema/beans"
