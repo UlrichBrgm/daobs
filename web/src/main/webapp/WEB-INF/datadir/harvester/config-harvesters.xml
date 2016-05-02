@@ -1,662 +1,929 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <!--
-
-    Copyright 2014-2016 European Environment Agency
-
-    Licensed under the EUPL, Version 1.1 or – as soon
-    they will be approved by the European Commission -
-    subsequent versions of the EUPL (the "Licence");
-    You may not use this work except in compliance
-    with the Licence.
-    You may obtain a copy of the Licence at:
-
-    https://joinup.ec.europa.eu/community/eupl/og_page/eupl
-
-    Unless required by applicable law or agreed to in
-    writing, software distributed under the Licence is
-    distributed on an "AS IS" basis,
-    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND,
-    either express or implied.
-    See the Licence for the specific language governing
-    permissions and limitations under the Licence.
-
--->
+  ~ Copyright 2014-2016 European Environment Agency
+  ~
+  ~ Licensed under the EUPL, Version 1.1 or – as soon
+  ~ they will be approved by the European Commission -
+  ~ subsequent versions of the EUPL (the "Licence");
+  ~ You may not use this work except in compliance
+  ~ with the Licence.
+  ~ You may obtain a copy of the Licence at:
+  ~
+  ~ https://joinup.ec.europa.eu/community/eupl/og_page/eupl
+  ~
+  ~ Unless required by applicable law or agreed to in
+  ~ writing, software distributed under the Licence is
+  ~ distributed on an "AS IS" basis,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND,
+  ~ either express or implied.
+  ~ See the Licence for the specific language governing
+  ~ permissions and limitations under the Licence.
+  -->
 <daobs:harvesters xmlns:daobs="http://daobs.org"
                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
                   xsi:noNamespaceSchemaLocation="../../daobsHarvesterConfig.xsd">
-
-
-  <!-- Configuration example with all options -->
-  <!--<daobs:harvester>
-    <daobs:uuid>0000</daobs:uuid>
-    <daobs:territory>test</daobs:territory>
-    <daobs:folder>test</daobs:folder>
-    <daobs:name>Test</daobs:name>
-    <daobs:url>http://localhost:8080/geonetwork/srv/eng/csw</daobs:url>
-    <daobs:filter>
-      <ogc:Filter xmlns:ogc="http://www.opengis.net/ogc">
-        <ogc:PropertyIsEqualTo>
-          <ogc:PropertyName>anyText</ogc:PropertyName>
-          <ogc:Literal>soil</ogc:Literal>
-        </ogc:PropertyIsEqualTo>
-      </ogc:Filter>
-    </daobs:filter>
-    <daobs:nbOfRecordsPerPage>5</daobs:nbOfRecordsPerPage>
-    <daobs:pointOfTruthURLPattern>http://localhost:8080/geonetwork?uuid={{uuid}}</daobs:pointOfTruthURLPattern>
-    <daobs:serviceMetadata>http://localhost:8080/geonetwork/srv/eng/csw?service=CSW&amp;request=GetRecordById&amp;id=000</daobs:serviceMetadata>
-  </daobs:harvester>
-  -->
-
-  <!--
-  List of CSW endpoints from
-  http://inspire-geoportal.ec.europa.eu/INSPIRERegistry/
-  -->
   <daobs:harvester>
-    <daobs:uuid>0a8b54e3-a216-43aa-a132-096eb72197cc</daobs:uuid>
-    <daobs:territory>NL</daobs:territory>
-    <daobs:folder>NL</daobs:folder>
-    <daobs:name>Nationaal Georegister (BeheerPDOK)</daobs:name>
-    <daobs:url>http://www.nationaalgeoregister.nl/geonetwork/srv/dut/inspire
-    </daobs:url>
-    <daobs:pointOfTruthURLPattern>
-      http://www.nationaalgeoregister.nl/geonetwork/?uuid={{uuid}}
-    </daobs:pointOfTruthURLPattern>
-  </daobs:harvester>
-
-  <daobs:harvester>
-    <daobs:uuid>1e420e84-e683-4b91-a1f1-db5b68320ee3</daobs:uuid>
-    <daobs:territory>LI</daobs:territory>
-    <daobs:folder>LI</daobs:folder>
-    <daobs:name>geocat.ch - liechtenstein</daobs:name>
-    <daobs:url>
-      http://www.geocat.ch/geonetwork/srv/ger/csw-liechtenstein-inspire
-    </daobs:url>
-    <daobs:pointOfTruthURLPattern>http://www.geocat.ch/geonetwork/?uuid={{uuid}}
-    </daobs:pointOfTruthURLPattern>
-  </daobs:harvester>
-
-  <daobs:harvester>
-    <daobs:uuid>9da7a1e6-101d-4053-9cc9-31e30a89d4fa</daobs:uuid>
-    <daobs:territory>LV</daobs:territory>
-    <daobs:folder>LV-LGIA</daobs:folder>
-    <daobs:name>ArcGIS Server Geoportal Extension 10 - OGC CSW 2.0.2 ISO AP</daobs:name>
-    <daobs:url>https://metadati.lgia.gov.lv/geoportal/csw</daobs:url>
-    <daobs:pointOfTruthURLPattern>
-      https://metadati.lgia.gov.lv/geoportal/catalog/search/resource/details.page?uuid={{uuid}}
-    </daobs:pointOfTruthURLPattern>
-  </daobs:harvester>
-
-  <daobs:harvester>
-    <daobs:uuid>37300ca5-fffc-4214-9a10-34e32ed25b8b</daobs:uuid>
-    <daobs:territory>IT</daobs:territory>
-    <daobs:folder>IT</daobs:folder>
-    <daobs:name>RNDT - Repertorio Nazionale dei Dati Territoriali - Servizio di
-      ricerca
-    </daobs:name>
-    <daobs:url>http://www.rndt.gov.it/RNDT/CSW/POST</daobs:url>
-  </daobs:harvester>
-  <daobs:harvester>
-    <daobs:uuid>c32c9922-00d6-11e6-9c5d-52540023a883</daobs:uuid>
-    <daobs:territory>BG</daobs:territory>
-    <daobs:folder>BG</daobs:folder>
-    <daobs:name>Услуга за откриване</daobs:name>
-    <daobs:url>http://gis.armf.bg:8080/geonetwork/srv/eng/csw</daobs:url>
-    <daobs:pointOfTruthURLPattern>http://gis.armf.bg:8080/geonetwork/?uuid={{uuid}}</daobs:pointOfTruthURLPattern>
-  </daobs:harvester>
-
-  <daobs:harvester>
-    <daobs:uuid>5d395fd3-aff2-4a27-959b-bcc5099f8725</daobs:uuid>
-    <daobs:territory>EL</daobs:territory>
-    <daobs:folder>EL</daobs:folder>
-    <daobs:name>ΚΑΤΑΛΟΓΟΣ (Elena)</daobs:name>
-    <daobs:url>http://www1.okxe.gr:80/geonetwork/srv/en/csw</daobs:url>
-    <daobs:pointOfTruthURLPattern>
-      http://www1.okxe.gr:80/geonetwork/?uuid={{uuid}}
-    </daobs:pointOfTruthURLPattern>
-  </daobs:harvester>
-
-  <daobs:harvester>
-    <daobs:uuid>6f77b9f1-aa4f-4688-ab32-2e721bcfefd9</daobs:uuid>
-    <daobs:territory>FI</daobs:territory>
-    <daobs:folder>FI</daobs:folder>
-    <daobs:name>Paikkatietohakemisto (Maanmittauslaitos)</daobs:name>
-    <daobs:url>http://www.paikkatietohakemisto.fi:80/geonetwork/srv/fi/csw
-    </daobs:url>
-    <daobs:filter>
-      <ogc:Filter xmlns:ogc="http://www.opengis.net/ogc">
-        <ogc:PropertyIsNotEqualTo>
-          <ogc:PropertyName>Subject</ogc:PropertyName>
-          <ogc:Literal>Ei-Inspire</ogc:Literal>
-        </ogc:PropertyIsNotEqualTo>
-      </ogc:Filter>
-    </daobs:filter>
-    <daobs:pointOfTruthURLPattern>
-      http://www.paikkatietohakemisto.fi:80/geonetwork/?uuid={{uuid}}
-    </daobs:pointOfTruthURLPattern>
-  </daobs:harvester>
-
-  <daobs:harvester>
-    <daobs:uuid>4d1adfec-73a8-4036-a633-c83b6b12fad9</daobs:uuid>
-    <daobs:territory>BE</daobs:territory>
-    <daobs:folder>BE-METAWAL</daobs:folder>
-    <daobs:name>Metawal - Catalogue pour l'information géographique de
-      Wallonie
-    </daobs:name>
-    <daobs:url>http://metawal.wallonie.be/geonetwork/srv/fre/csw-inspire
-    </daobs:url>
-    <daobs:pointOfTruthURLPattern>
-      http://metawal.wallonie.be/geonetwork/?uuid={{uuid}}
-    </daobs:pointOfTruthURLPattern>
-  </daobs:harvester>
-
-  <daobs:harvester>
-    <daobs:uuid>cccfbb63-b713-47ec-962f-bb24ee02fd12</daobs:uuid>
-    <daobs:territory>BE</daobs:territory>
-    <daobs:folder>BE-GEOPUNT</daobs:folder>
-    <daobs:name>Geopunt-Metadatacenter zoekdienst (AGIV)</daobs:name>
-    <daobs:url>http://metadata.geopunt.be/zoekdienst/srv/dut/csw</daobs:url>
-    <daobs:filter>
-      <ogc:Filter xmlns:ogc="http://www.opengis.net/ogc">
-        <ogc:PropertyIsLike escapeChar="\" singleChar="_" wildCard="%">
-          <ogc:PropertyName>keyword</ogc:PropertyName>
-          <ogc:Literal>%Lijst%M%R%INSPIRE%</ogc:Literal>
-        </ogc:PropertyIsLike>
-      </ogc:Filter>
-    </daobs:filter>
-    <daobs:pointOfTruthURLPattern>
-      http://metadata.geopunt.be/zoekdienst/?uuid={{uuid}}
-    </daobs:pointOfTruthURLPattern>
-  </daobs:harvester>
-
-
-  <daobs:harvester>
-    <daobs:uuid>44133c9a-f551-4fe4-ad83-0b14eff3a1e6</daobs:uuid>
-    <daobs:territory>DK</daobs:territory>
-    <daobs:folder>DK</daobs:folder>
-    <daobs:name>(Geodatastyrelsen, Miljøministeriet)</daobs:name>
-    <daobs:url>http://www.geodata-info.dk/registrant/srv/en/csw</daobs:url>
-    <daobs:pointOfTruthURLPattern>
-      http://www.geodata-info.dk/registrant/?uuid={{uuid}}
-    </daobs:pointOfTruthURLPattern>
-  </daobs:harvester>
-
-  <daobs:harvester>
-    <daobs:uuid>08880fe1-c0a6-4916-bf7d-ae6536edc8e2</daobs:uuid>
-    <daobs:territory>CY</daobs:territory>
-    <daobs:folder>CY</daobs:folder>
-    <daobs:name>Cyprus</daobs:name>
-    <daobs:url>http://inspire.cyprus.moi.gov.cy/geocatalog/srv/eng/csw</daobs:url>
-    <daobs:pointOfTruthURLPattern>http://inspire.cyprus.moi.gov.cy/geocatalog/?uuid={{uuid}}
-    </daobs:pointOfTruthURLPattern>
-  </daobs:harvester>
-
-  <daobs:harvester>
-    <daobs:uuid>64490bc7-c90f-4511-9b39-42e60def45cd</daobs:uuid>
-    <daobs:territory>BE</daobs:territory>
-    <daobs:folder>BE-GEO</daobs:folder>
-    <daobs:name>CSW service of the belgian federal government (National
-      geographic Institute/DG-INSPIRE)
-    </daobs:name>
-    <daobs:url>http://csw.geo.be/eng/csw</daobs:url>
-    <daobs:pointOfTruthURLPattern>http://csw.geo.be?uuid={{uuid}}
-    </daobs:pointOfTruthURLPattern>
-  </daobs:harvester>
-
-  <daobs:harvester>
-    <daobs:uuid>d8942689-c642-4708-8427-5a993a5f2663</daobs:uuid>
-    <daobs:territory>NO</daobs:territory>
-    <daobs:folder>NO</daobs:folder>
-    <daobs:name>Geonorge metadataportal (SKLD)</daobs:name>
-    <daobs:url>http://www.geonorge.no/geonetwork/srv/nor/csw-inspire</daobs:url>
-    <daobs:pointOfTruthURLPattern>
-      http://www.geonorge.no/geonetwork/?uuid={{uuid}}
-    </daobs:pointOfTruthURLPattern>
-  </daobs:harvester>
-
-  <daobs:harvester>
-    <daobs:uuid>04e5f2e4-59f1-4995-a170-fef88bd4b84a</daobs:uuid>
-    <daobs:territory>BE</daobs:territory>
-    <daobs:folder>BE-IRISNET</daobs:folder>
-    <daobs:name>GeoCatalogue de la Région de Bruxelles-Capitale (CIRB/CIBG)
-    </daobs:name>
-    <daobs:url>http://www.geo.irisnet.be/geonetwork/srv/fre/csw</daobs:url>
-    <daobs:filter>
-      <ogc:Filter xmlns:ogc="http://www.opengis.net/ogc">
-        <ogc:PropertyIsLike escapeChar="\" singleChar="?" wildCard="%">
-          <ogc:PropertyName>keyword</ogc:PropertyName>
-          <ogc:Literal>%Reporting Inspire%</ogc:Literal>
-        </ogc:PropertyIsLike>
-      </ogc:Filter>
-    </daobs:filter>
-    <daobs:pointOfTruthURLPattern>
-      http://www.geo.irisnet.be/geonetwork?uuid={{uuid}}
-    </daobs:pointOfTruthURLPattern>
-  </daobs:harvester>
-
-  <daobs:harvester>
-    <daobs:uuid>3447dcce-ef22-43b1-8852-5778c252c572</daobs:uuid>
-    <daobs:territory>EE</daobs:territory>
-    <daobs:folder>EE</daobs:folder>
-    <daobs:name>Estonia Discovery Service. (Estonian Land Board)</daobs:name>
-    <daobs:url>http://inspire.maaamet.ee/geoportal/csw</daobs:url>
-    <daobs:filter>
-      <ogc:Filter xmlns:ogc="http://www.opengis.net/ogc">
-        <ogc:PropertyIsLike escapeChar="\" singleChar="_" wildCard="%">
-          <ogc:PropertyName>apiso:Subject</ogc:PropertyName>
-          <ogc:Literal>%INSPIRE%</ogc:Literal>
-        </ogc:PropertyIsLike>
-      </ogc:Filter>
-    </daobs:filter>
-  </daobs:harvester>
-
-  <daobs:harvester>
-    <daobs:uuid>c1f4ab0f-bb9f-4ba3-8c83-54fd3b3c8b71</daobs:uuid>
-    <daobs:territory>HU</daobs:territory>
-    <daobs:folder>HU</daobs:folder>
-    <daobs:name>FÖMI catalog service / FÖMI katalógus szolgáltatás</daobs:name>
-    <daobs:url>http://www.geoshop.hu:80/geonetwork/srv/en/csw</daobs:url>
-    <daobs:pointOfTruthURLPattern>
-      http://www.geoshop.hu:80/geonetwork?uuid={{uuid}}
-    </daobs:pointOfTruthURLPattern>
-  </daobs:harvester>
-
-  <daobs:harvester>
-    <daobs:uuid>f87e28a9-d61e-4499-bd7b-e387069e8c79</daobs:uuid>
-    <daobs:territory>UK</daobs:territory>
-    <daobs:folder>UK</daobs:folder>
-    <daobs:name>UK Location Catalogue Publishing Service (Ordnance Survey, GB)
-    </daobs:name>
-    <daobs:url>http://csw.data.gov.uk/geonetwork/srv/en/csw</daobs:url>
-    <daobs:pointOfTruthURLPattern>
-      http://csw.data.gov.uk/geonetwork/?uuid={{uuid}}
-    </daobs:pointOfTruthURLPattern>
-  </daobs:harvester>
-
-  <daobs:harvester>
-    <daobs:uuid>6c3ec9e7-d505-4bc7-a4cf-69169b8be597</daobs:uuid>
-    <daobs:territory>LU</daobs:territory>
-    <daobs:folder>LU</daobs:folder>
-    <daobs:name>INSPIRE Geoportal CSW des Großherzogtums Luxembourg</daobs:name>
-    <daobs:url>http://inspire.geoportail.lu/geoportal/csw</daobs:url>
-  </daobs:harvester>
-
-  <daobs:harvester>
-    <daobs:uuid>f17bb142-be5e-4c33-bfa7-b52c3a18660e</daobs:uuid>
-    <daobs:territory>SE</daobs:territory>
-    <daobs:folder>SE</daobs:folder>
-    <daobs:name>Nationell svensk metadatakatalog ()</daobs:name>
-    <daobs:url>https://www.geodata.se/InspireCswProxy/csw</daobs:url>
-  </daobs:harvester>
-
-  <daobs:harvester>
-    <daobs:uuid>fe1cebf2-784e-4412-ab0f-3a405803a0d3</daobs:uuid>
-    <daobs:territory>HR</daobs:territory>
-    <daobs:folder>HR</daobs:folder>
-    <daobs:name>Pilot kataloškog servera (Otišao)</daobs:name>
-    <daobs:url>http://geoportal.nipp.hr/geonetwork/srv/hrv/csw-inspire
-    </daobs:url>
-    <daobs:pointOfTruthURLPattern>
-      http://geoportal.nipp.hr/geonetwork?uuid={{uuid}}
-    </daobs:pointOfTruthURLPattern>
-  </daobs:harvester>
-
-  <daobs:harvester>
-    <daobs:uuid>2e121468-8fa4-461a-a5a1-553810a8642a</daobs:uuid>
-    <daobs:territory>CZ</daobs:territory>
-    <daobs:folder>CZ</daobs:folder>
-    <daobs:name>Czech Republic INSPIRE metadata catalogue (CENIA, Czech
-      Environmental Information Agency)
-    </daobs:name>
-    <daobs:url>http://geoportal.gov.cz/php/micka/inspire/index.php</daobs:url>
-    <daobs:nbOfRecordsPerPage>50</daobs:nbOfRecordsPerPage>
-  </daobs:harvester>
-
-  <daobs:harvester>
-    <daobs:uuid>ea8fbb18-4dda-47b4-a61b-dff6b6cafd8a</daobs:uuid>
-    <daobs:territory>AT</daobs:territory>
-    <daobs:folder>AT</daobs:folder>
-    <daobs:name>INSPIRE Geo-Portal Katalogservice BMLFUW/Österreich
-      (Bundesministerium für Land- und Forstwirtschaft, Umwelt und Was...
-    </daobs:name>
-    <daobs:url>
-      https://geometadaten.lfrz.at/at.lfrz.discoveryservices/srv/de/csw202
-    </daobs:url>
-    <daobs:nbOfRecordsPerPage>10</daobs:nbOfRecordsPerPage>
-    <daobs:pointOfTruthURLPattern>
-      https://geometadaten.lfrz.at/at.lfrz.discoveryservices/?uuid={{uuid}}
-    </daobs:pointOfTruthURLPattern>
-  </daobs:harvester>
-
-  <daobs:harvester>
-    <daobs:uuid>3a6341a4-1984-4d31-8523-b943d859dc51</daobs:uuid>
-    <daobs:territory>IE</daobs:territory>
-    <daobs:folder>IE</daobs:folder>
-    <daobs:name>Geoportal IE - INSPIRE Discovery Service (Department of
-      Environment, Community and Local Government)
-    </daobs:name>
-    <daobs:url>https://www.geoportal.ie/geoportal/csw</daobs:url>
-    <daobs:pointOfTruthURLPattern>
-      http://www.geoportal.ie/geoportal/catalog/search/resource/details.page?uuid={{uuid}}
-    </daobs:pointOfTruthURLPattern>
-  </daobs:harvester>
-
-  <daobs:harvester>
-    <daobs:uuid>8406e8cb-6edd-435b-8801-762c71616cc5</daobs:uuid>
-    <daobs:territory>DE</daobs:territory>
-    <daobs:folder>DE</daobs:folder>
-    <daobs:name>GeoDatenKatalog.De (BKG)</daobs:name>
-    <daobs:url>http://ims.geoportal.de/gdi-de/srv/eng/csw</daobs:url>
-    <daobs:filter>
-      <ogc:Filter xmlns:ogc="http://www.opengis.net/ogc">
-        <ogc:PropertyIsLike escapeChar="\" singleChar="?" wildCard="*">
-          <ogc:PropertyName>AnyText</ogc:PropertyName>
-          <ogc:Literal>inspireidentifiziert</ogc:Literal>
-        </ogc:PropertyIsLike>
-      </ogc:Filter>
-    </daobs:filter>
-    <daobs:pointOfTruthURLPattern>http://ims.geoportal.de/gdi-de/?uuid={{uuid}}
-    </daobs:pointOfTruthURLPattern>
-  </daobs:harvester>
-
-  <daobs:harvester>
-    <daobs:uuid>08ce8000-58b1-431f-a0ee-071b1ce438d0</daobs:uuid>
-    <daobs:territory>RO</daobs:territory>
-    <daobs:folder>RO</daobs:folder>
-    <daobs:name>Serviciul de căutare al geo-portalului INSPIRE al României
-      (ANCPI)
-    </daobs:name>
-    <daobs:url>http://geoportal.ancpi.ro/geoportal/csw</daobs:url>
-  </daobs:harvester>
-
-  <daobs:harvester>
-    <daobs:uuid>be1da986-42f6-4566-afdc-33bc05b5a0c0</daobs:uuid>
-    <daobs:territory>IS</daobs:territory>
-    <daobs:folder>IS</daobs:folder>
-    <daobs:name>Iceland Service</daobs:name>
-    <daobs:url>http://gatt.lmi.is/geoportal122/csw</daobs:url>
-  </daobs:harvester>
-
-  <daobs:harvester>
-    <daobs:uuid>14341989-de18-4453-ade0-082cab1f0812</daobs:uuid>
-    <daobs:territory>PT</daobs:territory>
-    <daobs:folder>PT</daobs:folder>
-    <daobs:name>INSPIRE-PT Catalog Service</daobs:name>
-    <daobs:url>http://snig.dgterritorio.pt/geoportal/csw/discovery</daobs:url>
-    <daobs:filter>
-      <!--
-      The filter is based on keyword instead of a list of UUIDs.
-      See https://ies-svn.jrc.ec.europa.eu/issues/2338 -->
-      <ogc:Filter xmlns:ogc="http://www.opengis.net/ogc">
-        <ogc:PropertyIsEqualTo>
-          <ogc:PropertyName>Subject</ogc:PropertyName>
-          <ogc:Literal>INSPIRECORE</ogc:Literal>
-        </ogc:PropertyIsEqualTo>
-      </ogc:Filter>
-    </daobs:filter>
-  </daobs:harvester>
-
-  <daobs:harvester>
-    <daobs:uuid>6f332d05-c29e-4b1d-9b8f-a4fb0df67c7f</daobs:uuid>
-    <daobs:territory>LV</daobs:territory>
-    <daobs:folder>LV-VISS</daobs:folder>
-    <daobs:name>Latvian metadata catalogue. GDC (Geospatial data connector)
-      (organization name)
-    </daobs:name>
-    <daobs:url>https://geometadati.viss.gov.lv/geoportal/csw</daobs:url>
-    <daobs:filter>
-      <ogc:Filter xmlns:ogc="http://www.opengis.net/ogc">
-        <ogc:PropertyIsNull>
-          <ogc:PropertyName>apiso:DataQualityValue</ogc:PropertyName>
-        </ogc:PropertyIsNull>
-      </ogc:Filter>
-    </daobs:filter>
-  </daobs:harvester>
-
-  <daobs:harvester>
-    <daobs:uuid>6fe4fea2-55af-4aaf-b12e-68a6841dfa2b</daobs:uuid>
-    <daobs:territory>ES</daobs:territory>
-    <daobs:folder>ES</daobs:folder>
-    <daobs:name>IDEE Discovery service (CNIG en nombre del Consejo Superior
-      Geográfico)
-    </daobs:name>
-    <daobs:url>http://www.idee.es/csw-inspire-idee/srv/spa/csw</daobs:url>
-    <daobs:filter>
-      <ogc:Filter xmlns:ogc="http://www.opengis.net/ogc">
-        <ogc:Or>
-          <ogc:PropertyIsEqualTo>
-            <ogc:PropertyName>apiso:type</ogc:PropertyName>
-            <ogc:Literal>series</ogc:Literal>
-          </ogc:PropertyIsEqualTo>
-          <ogc:PropertyIsEqualTo>
-            <ogc:PropertyName>apiso:type</ogc:PropertyName>
-            <ogc:Literal>service</ogc:Literal>
-          </ogc:PropertyIsEqualTo>
-          <ogc:PropertyIsEqualTo>
-            <ogc:PropertyName>apiso:type</ogc:PropertyName>
-            <ogc:Literal>dataset</ogc:Literal>
-          </ogc:PropertyIsEqualTo>
-        </ogc:Or>
-      </ogc:Filter>
-    </daobs:filter>
-    <daobs:pointOfTruthURLPattern>
-      http://www.idee.es/csw-inspire-idee/?uuid={{uuid}}
-    </daobs:pointOfTruthURLPattern>
-  </daobs:harvester>
-
-  <daobs:harvester>
-    <daobs:uuid>3f25ac7a-35fa-4a38-ae8b-68f05c8967aa</daobs:uuid>
-    <daobs:territory>FR</daobs:territory>
-    <daobs:folder>FR</daobs:folder>
-    <daobs:name>Geocatalogue Catalogue Server INSPIRE (BRGM)</daobs:name>
-    <daobs:url>http://www.geocatalogue.fr/api-public/inspire/servicesRest
-    </daobs:url>
+    <daobs:uuid>1412</daobs:uuid>
+    <daobs:territory>GEONORMANDIE</daobs:territory>
+    <daobs:folder>GEONORMANDIE</daobs:folder>
+    <daobs:name>GeoNormandie</daobs:name>
+    <daobs:url>http://catalogue.geonormandie.fr/geonetwork/srv/fre/csw-local?</daobs:url>
     <daobs:nbOfRecordsPerPage>200</daobs:nbOfRecordsPerPage>
   </daobs:harvester>
-
   <daobs:harvester>
-    <daobs:uuid>a0e38db0-904f-477b-afdd-339ac304db53</daobs:uuid>
-    <daobs:territory>SK</daobs:territory>
-    <daobs:folder>SK</daobs:folder>
-    <daobs:name>Katalógová služba Národného Geoportálu (Slovenská agentúra
-      životného prostredia)
-    </daobs:name>
-    <daobs:url>http://csw.sazp.sk/</daobs:url>
-  </daobs:harvester>
-
-  <daobs:harvester>
-    <daobs:uuid>b207c9b4-cc15-4a09-88e0-ef8785bfa657</daobs:uuid>
-    <daobs:territory>SI</daobs:territory>
-    <daobs:folder>SI</daobs:folder>
-    <daobs:name>Slovenski Inspire metadata sistem (admin)</daobs:name>
-    <daobs:url>http://prostor4.gov.si/imps/srv/slV/csw</daobs:url>
-    <daobs:pointOfTruthURLPattern>http://prostor4.gov.si/imps/?uuid={{uuid}}
-    </daobs:pointOfTruthURLPattern>
-  </daobs:harvester>
-
-  <daobs:harvester>
-    <daobs:uuid>35872ce0-d55e-4e41-a4a7-343737598fe3</daobs:uuid>
-    <daobs:territory>PL</daobs:territory>
-    <daobs:folder>PL</daobs:folder>
-    <daobs:name>Geoportal - Polska Usługa Wyszukiwania INSPIRE (Centralny
-      Ośrodek Dokumentacji Geodezyjnej i Kartograficznej)
-    </daobs:name>
-    <daobs:url>
-      http://mapy.geoportal.gov.pl/wss/service/CSWINSP/guest/CSWStartup
-    </daobs:url>
-    <daobs:nbOfRecordsPerPage>50</daobs:nbOfRecordsPerPage>
+    <daobs:uuid>607</daobs:uuid>
+    <daobs:territory>SEXTANT</daobs:territory>
+    <daobs:folder>SEXTANT</daobs:folder>
+    <daobs:name>Sextant</daobs:name>
+    <daobs:url>http://sextant.ifremer.fr/geonetwork/srv/fre/csw-GEOCATALOGUE?</daobs:url>
+    <daobs:nbOfRecordsPerPage>200</daobs:nbOfRecordsPerPage>
   </daobs:harvester>
   <daobs:harvester>
-    <daobs:uuid>INSPIRE-d81e48c4-b4cf-11e3-a455-52540004b857-00</daobs:uuid>
-    <daobs:territory>PL</daobs:territory>
-    <daobs:folder>PL-00</daobs:folder>
-    <daobs:name>Portal Geostatystyczny - Usługa wyszukiwania metadanych (Główny
-      Urząd Statystyczny)
-    </daobs:name>
-    <daobs:url>https://geo.stat.gov.pl/soapServices/CSWStartup</daobs:url>
-    <daobs:pointOfTruthURLPattern></daobs:pointOfTruthURLPattern>
-    <daobs:serviceMetadata></daobs:serviceMetadata>
+    <daobs:uuid>601</daobs:uuid>
+    <daobs:territory>DREALPACA</daobs:territory>
+    <daobs:folder>DREALPACA</daobs:folder>
+    <daobs:name>DREAL PACA</daobs:name>
+    <daobs:url>http://metadata.carmencarto.fr/geosource/25/fre/csw?</daobs:url>
+    <daobs:nbOfRecordsPerPage>200</daobs:nbOfRecordsPerPage>
   </daobs:harvester>
   <daobs:harvester>
-    <daobs:uuid>INSPIRE-d81e48c4-b4cf-11e3-a455-52540004b857-01</daobs:uuid>
-    <daobs:territory>PL</daobs:territory>
-    <daobs:folder>PL-01</daobs:folder>
-    <daobs:name>metadane.gison.pl / csw-zawoja</daobs:name>
-    <daobs:url>http://metadane.gison.pl/geonetwork/srv/eng/csw-zawoja
-    </daobs:url>
-    <daobs:pointOfTruthURLPattern>http://metadane.gison.pl/geonetwork/?uuid=
-    </daobs:pointOfTruthURLPattern>
-    <daobs:serviceMetadata></daobs:serviceMetadata>
+    <daobs:uuid>1301</daobs:uuid>
+    <daobs:territory>GEOBOURGOGNE</daobs:territory>
+    <daobs:folder>GEOBOURGOGNE</daobs:folder>
+    <daobs:name>GéoBourgogne</daobs:name>
+    <daobs:url>http://www.geobourgogne.fr/geonetwork/srv/fre/csw-local?</daobs:url>
+    <daobs:nbOfRecordsPerPage>200</daobs:nbOfRecordsPerPage>
   </daobs:harvester>
   <daobs:harvester>
-    <daobs:uuid>INSPIRE-d81e48c4-b4cf-11e3-a455-52540004b857-03</daobs:uuid>
-    <daobs:territory>PL</daobs:territory>
-    <daobs:folder>PL-03</daobs:folder>
-    <daobs:name>G-SIP Konstancin-Jeziorna Metadata Catalog (Urząd Miasta i Gminy
-      Konstancin-Jeziorna)
-    </daobs:name>
-    <daobs:url>http://gsip.konstancinjeziorna.pl/geonetwork/srv/eng/csw
-    </daobs:url>
-    <daobs:pointOfTruthURLPattern>
-      http://gsip.konstancinjeziorna.pl/geonetwork/?uuid=
-    </daobs:pointOfTruthURLPattern>
-    <daobs:serviceMetadata></daobs:serviceMetadata>
+    <daobs:uuid>51520</daobs:uuid>
+    <daobs:territory>CARGOS</daobs:territory>
+    <daobs:folder>CARGOS</daobs:folder>
+    <daobs:name>CArGOS</daobs:name>
+    <daobs:url>http://cargos.huma-num.fr/geosource/srv/fre/csw?</daobs:url>
+    <daobs:nbOfRecordsPerPage>200</daobs:nbOfRecordsPerPage>
   </daobs:harvester>
   <daobs:harvester>
-    <daobs:uuid>INSPIRE-d81e48c4-b4cf-11e3-a455-52540004b857-04</daobs:uuid>
-    <daobs:territory>PL</daobs:territory>
-    <daobs:folder>PL-04</daobs:folder>
-    <daobs:name>GDOŚ Geoportal usługa katalogowa - INSPIRE Usługa wyszukania
-    </daobs:name>
-    <daobs:url>http://sdi.gdos.gov.pl/soapServices/CSWStartup</daobs:url>
-    <daobs:pointOfTruthURLPattern></daobs:pointOfTruthURLPattern>
-    <daobs:serviceMetadata></daobs:serviceMetadata>
+    <daobs:uuid>450</daobs:uuid>
+    <daobs:territory>CARMEN</daobs:territory>
+    <daobs:folder>CARMEN</daobs:folder>
+    <daobs:name>carmen</daobs:name>
+    <daobs:url>http://metadata.carmencarto.fr/geosource/61/fre/csw?</daobs:url>
+    <daobs:nbOfRecordsPerPage>200</daobs:nbOfRecordsPerPage>
   </daobs:harvester>
   <daobs:harvester>
-    <daobs:uuid>INSPIRE-d81e48c4-b4cf-11e3-a455-52540004b857-05</daobs:uuid>
-    <daobs:territory>PL</daobs:territory>
-    <daobs:folder>PL-05</daobs:folder>
-    <daobs:name>metadane.gison.pl / csw-zabierzow</daobs:name>
-    <daobs:url>http://metadane.gison.pl/geonetwork/srv/eng/csw-zabierzow
-    </daobs:url>
-    <daobs:pointOfTruthURLPattern>http://metadane.gison.pl/geonetwork/?uuid=
-    </daobs:pointOfTruthURLPattern>
-    <daobs:serviceMetadata></daobs:serviceMetadata>
+    <daobs:uuid>1411</daobs:uuid>
+    <daobs:territory>52</daobs:territory>
+    <daobs:folder>52</daobs:folder>
+    <daobs:name>52</daobs:name>
+    <daobs:url>http://www.mongeosource.fr/geosource/geosource/fre/csw?</daobs:url>
+    <daobs:nbOfRecordsPerPage>200</daobs:nbOfRecordsPerPage>
   </daobs:harvester>
   <daobs:harvester>
-    <daobs:uuid>INSPIRE-d81e48c4-b4cf-11e3-a455-52540004b857-06</daobs:uuid>
-    <daobs:territory>PL</daobs:territory>
-    <daobs:folder>PL-06</daobs:folder>
-    <daobs:name>Katalog metadanych firmy J.O.C.GIS (J.O.C.GIS)</daobs:name>
-    <daobs:url>http://metadane.jocgis.pl/geonetwork/srv/eng/csw</daobs:url>
-    <daobs:pointOfTruthURLPattern>http://metadane.jocgis.pl/geonetwork/?uuid=
-    </daobs:pointOfTruthURLPattern>
-    <daobs:serviceMetadata></daobs:serviceMetadata>
+    <daobs:uuid>1151</daobs:uuid>
+    <daobs:territory>GEORHONEALPES</daobs:territory>
+    <daobs:folder>GEORHONEALPES</daobs:folder>
+    <daobs:name>GEORHONEALPES</daobs:name>
+    <daobs:url>http://www.georhonealpes.fr/geonetwork/srv/fre/csw-RAIN?</daobs:url>
+    <daobs:nbOfRecordsPerPage>200</daobs:nbOfRecordsPerPage>
   </daobs:harvester>
   <daobs:harvester>
-    <daobs:uuid>INSPIRE-d81e48c4-b4cf-11e3-a455-52540004b857-07</daobs:uuid>
-    <daobs:territory>PL</daobs:territory>
-    <daobs:folder>PL-07</daobs:folder>
-    <daobs:name>Usługa wyszukiwania INSPIRE - Catalogue Services for Web (CSW)
-    </daobs:name>
-    <daobs:url>http://inspire.gios.gov.pl/aquarius-csw/post</daobs:url>
-    <daobs:pointOfTruthURLPattern></daobs:pointOfTruthURLPattern>
-    <daobs:serviceMetadata></daobs:serviceMetadata>
+    <daobs:uuid>51466</daobs:uuid>
+    <daobs:territory>CATALOGUEANAEE</daobs:territory>
+    <daobs:folder>CATALOGUEANAEE</daobs:folder>
+    <daobs:name>catalogue anaee</daobs:name>
+    <daobs:url>http://w3.avignon.inra.fr/geonetwork_anaee/srv/eng/csw?</daobs:url>
+    <daobs:nbOfRecordsPerPage>200</daobs:nbOfRecordsPerPage>
   </daobs:harvester>
   <daobs:harvester>
-    <daobs:uuid>INSPIRE-d81e48c4-b4cf-11e3-a455-52540004b857-08</daobs:uuid>
-    <daobs:territory>PL</daobs:territory>
-    <daobs:folder>PL-08</daobs:folder>
-    <daobs:name>metadane-inspire.pgi.gov.pl</daobs:name>
-    <daobs:url>http://metadane-inspire.pgi.gov.pl/geonetwork/srv/eng/csw
-    </daobs:url>
-    <daobs:pointOfTruthURLPattern>
-      http://metadane-inspire.pgi.gov.pl/geonetwork/?uuid=
-    </daobs:pointOfTruthURLPattern>
-    <daobs:serviceMetadata></daobs:serviceMetadata>
+    <daobs:uuid>1253</daobs:uuid>
+    <daobs:territory>SIGLOIRE</daobs:territory>
+    <daobs:folder>SIGLOIRE</daobs:folder>
+    <daobs:name>Sigloire</daobs:name>
+    <daobs:url>http://catalogue.sigloire.fr/geonetwork/srv/fre/csw-sigloire?</daobs:url>
+    <daobs:nbOfRecordsPerPage>200</daobs:nbOfRecordsPerPage>
   </daobs:harvester>
   <daobs:harvester>
-    <daobs:uuid>INSPIRE-d81e48c4-b4cf-11e3-a455-52540004b857-09</daobs:uuid>
-    <daobs:territory>PL</daobs:territory>
-    <daobs:folder>PL-09</daobs:folder>
-    <daobs:name>metadane.gison.pl / csw-mszanadolna</daobs:name>
-    <daobs:url>http://metadane.gison.pl/geonetwork/srv/eng/csw-mszanadolna
-    </daobs:url>
-    <daobs:pointOfTruthURLPattern>http://metadane.gison.pl/geonetwork/?uuid=
-    </daobs:pointOfTruthURLPattern>
-    <daobs:serviceMetadata></daobs:serviceMetadata>
+    <daobs:uuid>457</daobs:uuid>
+    <daobs:territory>SANDRE</daobs:territory>
+    <daobs:folder>SANDRE</daobs:folder>
+    <daobs:name>SANDRE</daobs:name>
+    <daobs:url>http://services.sandre.eaufrance.fr/geonetwork_CSW/srv/en/csw?</daobs:url>
+    <daobs:nbOfRecordsPerPage>200</daobs:nbOfRecordsPerPage>
   </daobs:harvester>
   <daobs:harvester>
-    <daobs:uuid>INSPIRE-d81e48c4-b4cf-11e3-a455-52540004b857-10</daobs:uuid>
-    <daobs:territory>PL</daobs:territory>
-    <daobs:folder>PL-10</daobs:folder>
-    <daobs:name>Narodowy Instytut Dziedzictwa - discovery service (CSW)
-    </daobs:name>
-    <daobs:url>http://mapy.zabytek.gov.pl/CSW_NID/Service.svc/post</daobs:url>
-    <daobs:pointOfTruthURLPattern></daobs:pointOfTruthURLPattern>
-    <daobs:serviceMetadata></daobs:serviceMetadata>
+    <daobs:uuid>51421</daobs:uuid>
+    <daobs:territory>DREALPICARDIE</daobs:territory>
+    <daobs:folder>DREALPICARDIE</daobs:folder>
+    <daobs:name>DREAL Picardie</daobs:name>
+    <daobs:url>http://metadata.carmencarto.fr/geosource/27/fre/csw?</daobs:url>
+    <daobs:nbOfRecordsPerPage>200</daobs:nbOfRecordsPerPage>
   </daobs:harvester>
   <daobs:harvester>
-    <daobs:uuid>INSPIRE-d81e48c4-b4cf-11e3-a455-52540004b857-11</daobs:uuid>
-    <daobs:territory>PL</daobs:territory>
-    <daobs:folder>PL-11</daobs:folder>
-    <daobs:name>Usługa wyszukiwania INSPIRE - Catalogue Services for Web (CSW)
-    </daobs:name>
-    <daobs:url>http://inspire.gios.gov.pl/aquarius-csw/post</daobs:url>
-    <daobs:pointOfTruthURLPattern></daobs:pointOfTruthURLPattern>
-    <daobs:serviceMetadata></daobs:serviceMetadata>
+    <daobs:uuid>51490</daobs:uuid>
+    <daobs:territory>GEOPLATEFORME17</daobs:territory>
+    <daobs:folder>GEOPLATEFORME17</daobs:folder>
+    <daobs:name>Géoplateforme17</daobs:name>
+    <daobs:url>http://test.geoplateforme17.fr/proxy/geonetwork-prod?CONSTRAINT_LANGUAGE_VERSION=1.1.0</daobs:url>
+    <daobs:nbOfRecordsPerPage>200</daobs:nbOfRecordsPerPage>
   </daobs:harvester>
   <daobs:harvester>
-    <daobs:uuid>INSPIRE-d81e48c4-b4cf-11e3-a455-52540004b857-12</daobs:uuid>
-    <daobs:territory>PL</daobs:territory>
-    <daobs:folder>PL-12</daobs:folder>
-    <daobs:name>Usługa wyszukiwania Systemu Informacji Przestrzennej Urzędu
-      Miasta Racibórz
-    </daobs:name>
-    <daobs:url>http://esim.raciborz.pl/geoportal/csw</daobs:url>
-    <daobs:pointOfTruthURLPattern></daobs:pointOfTruthURLPattern>
-    <daobs:serviceMetadata></daobs:serviceMetadata>
+    <daobs:uuid>455</daobs:uuid>
+    <daobs:territory>CARMEN(MNHN)</daobs:territory>
+    <daobs:folder>CARMEN(MNHN)</daobs:folder>
+    <daobs:name>CARMEN (MNHN)</daobs:name>
+    <daobs:url>http://metadata.carmencarto.fr:80/geosource/119/eng/csw?</daobs:url>
+    <daobs:nbOfRecordsPerPage>200</daobs:nbOfRecordsPerPage>
   </daobs:harvester>
   <daobs:harvester>
-    <daobs:uuid>INSPIRE-d81e48c4-b4cf-11e3-a455-52540004b857-13</daobs:uuid>
-    <daobs:territory>PL</daobs:territory>
-    <daobs:folder>PL-13</daobs:folder>
-    <daobs:name>Serwer katalogowy Geo-System (Geo)</daobs:name>
-    <daobs:url>http://metadane.podgik.pl/geonetwork26/srv/en/csw</daobs:url>
-    <daobs:pointOfTruthURLPattern>
-      http://metadane.podgik.pl/geonetwork26/?uuid=
-    </daobs:pointOfTruthURLPattern>
-    <daobs:serviceMetadata></daobs:serviceMetadata>
+    <daobs:uuid>51450</daobs:uuid>
+    <daobs:territory>ERDF</daobs:territory>
+    <daobs:folder>ERDF</daobs:folder>
+    <daobs:name>ERDF</daobs:name>
+    <daobs:url>http://www.mongeosource.fr/geosource/1187/fre/csw?</daobs:url>
+    <daobs:nbOfRecordsPerPage>200</daobs:nbOfRecordsPerPage>
   </daobs:harvester>
   <daobs:harvester>
-    <daobs:uuid>INSPIRE-d81e48c4-b4cf-11e3-a455-52540004b857-14</daobs:uuid>
-    <daobs:territory>PL</daobs:territory>
-    <daobs:folder>PL-14</daobs:folder>
-    <daobs:name>Miasto Głogów - usługa wyszukiwania CSW - zagospodarowanie
-      przestrzenne
-    </daobs:name>
-    <daobs:url>http://sit.glogow.pl/CSW/Service.svc/post</daobs:url>
-    <daobs:pointOfTruthURLPattern></daobs:pointOfTruthURLPattern>
-    <daobs:serviceMetadata></daobs:serviceMetadata>
+    <daobs:uuid>1354</daobs:uuid>
+    <daobs:territory>PEGASEPOITOU-CHARENTES</daobs:territory>
+    <daobs:folder>PEGASEPOITOU-CHARENTES</daobs:folder>
+    <daobs:name>Pegase Poitou-Charentes</daobs:name>
+    <daobs:url>http://www.pegase-poitou-charentes.fr/geonetwork/srv/fre/csw?</daobs:url>
+    <daobs:nbOfRecordsPerPage>200</daobs:nbOfRecordsPerPage>
   </daobs:harvester>
   <daobs:harvester>
-    <daobs:uuid>INSPIRE-d81e48c4-b4cf-11e3-a455-52540004b857-15</daobs:uuid>
-    <daobs:territory>PL</daobs:territory>
-    <daobs:folder>PL-15</daobs:folder>
-    <daobs:name>Usługa wyszukiwania Systemu Informacji Przestrzennej Związku
-      Miast i Gmin Dorzecza Parsęty
-    </daobs:name>
-    <daobs:url>http://gis.parseta.pl/geoportal/csw</daobs:url>
-    <daobs:pointOfTruthURLPattern></daobs:pointOfTruthURLPattern>
-    <daobs:serviceMetadata></daobs:serviceMetadata>
+    <daobs:uuid>615</daobs:uuid>
+    <daobs:territory>GEOPAL</daobs:territory>
+    <daobs:folder>GEOPAL</daobs:folder>
+    <daobs:name>Geopal</daobs:name>
+    <daobs:url>http://www.geopal.org/geonetwork/srv/fre/csw-local?</daobs:url>
+    <daobs:nbOfRecordsPerPage>200</daobs:nbOfRecordsPerPage>
   </daobs:harvester>
   <daobs:harvester>
-    <daobs:uuid>INSPIRE-d81e48c4-b4cf-11e3-a455-52540004b857-16</daobs:uuid>
-    <daobs:territory>PL</daobs:territory>
-    <daobs:folder>PL-16</daobs:folder>
-    <daobs:name>Usługa katalogowa Modułu SDI gmin zrzeszonych w Związku Miast i Gmin dorzecza
-      Parsęty
-    </daobs:name>
-    <daobs:url>http://sdi.parseta.pl/SDIProCSW/Service.svc/post</daobs:url>
-    <daobs:pointOfTruthURLPattern></daobs:pointOfTruthURLPattern>
-    <daobs:serviceMetadata></daobs:serviceMetadata>
+    <daobs:uuid>51516</daobs:uuid>
+    <daobs:territory>SHOM</daobs:territory>
+    <daobs:folder>SHOM</daobs:folder>
+    <daobs:name>shom</daobs:name>
+    <daobs:url>http://services.data.shom.fr/csw/ISOAP</daobs:url>
+    <daobs:nbOfRecordsPerPage>200</daobs:nbOfRecordsPerPage>
+  </daobs:harvester>
+  <daobs:harvester>
+    <daobs:uuid>401</daobs:uuid>
+    <daobs:territory>ADELIE</daobs:territory>
+    <daobs:folder>ADELIE</daobs:folder>
+    <daobs:name>ADELIE</daobs:name>
+    <daobs:url>http://adelie.application.developpement-durable.gouv.fr/minicsw.do?</daobs:url>
+    <daobs:nbOfRecordsPerPage>200</daobs:nbOfRecordsPerPage>
+  </daobs:harvester>
+  <daobs:harvester>
+    <daobs:uuid>51469</daobs:uuid>
+    <daobs:territory>TIGEO</daobs:territory>
+    <daobs:folder>TIGEO</daobs:folder>
+    <daobs:name>TIGeo</daobs:name>
+    <daobs:url>http://www.tigeo.fr/proxy/geonetwork-cat?CONSTRAINT_LANGUAGE_VERSION=1.1.0</daobs:url>
+    <daobs:nbOfRecordsPerPage>200</daobs:nbOfRecordsPerPage>
+  </daobs:harvester>
+  <daobs:harvester>
+    <daobs:uuid>51431</daobs:uuid>
+    <daobs:territory>ONF</daobs:territory>
+    <daobs:folder>ONF</daobs:folder>
+    <daobs:name>ONF</daobs:name>
+    <daobs:url>http://www.mongeosource.fr/geosource/Admin_ONF/fre/csw?</daobs:url>
+    <daobs:nbOfRecordsPerPage>200</daobs:nbOfRecordsPerPage>
+  </daobs:harvester>
+  <daobs:harvester>
+    <daobs:uuid>51413</daobs:uuid>
+    <daobs:territory>AGENCEDELEAUARTOIS-PICARDIE</daobs:territory>
+    <daobs:folder>AGENCEDELEAUARTOIS-PICARDIE</daobs:folder>
+    <daobs:name>Agence de l'eau Artois-Picardie</daobs:name>
+    <daobs:url>http://www.mongeosource.fr/geosource/admin_52/fre/csw?</daobs:url>
+    <daobs:nbOfRecordsPerPage>200</daobs:nbOfRecordsPerPage>
+  </daobs:harvester>
+  <daobs:harvester>
+    <daobs:uuid>454</daobs:uuid>
+    <daobs:territory>IFN</daobs:territory>
+    <daobs:folder>IFN</daobs:folder>
+    <daobs:name>IFN</daobs:name>
+    <daobs:url>http://geosource.ifn.fr/geonetwork/srv/fre/csw?</daobs:url>
+    <daobs:nbOfRecordsPerPage>200</daobs:nbOfRecordsPerPage>
+  </daobs:harvester>
+  <daobs:harvester>
+    <daobs:uuid>51455</daobs:uuid>
+    <daobs:territory>CONSEILDEPARTEMENTALPAS-DE-CALAIS</daobs:territory>
+    <daobs:folder>CONSEILDEPARTEMENTALPAS-DE-CALAIS</daobs:folder>
+    <daobs:name>Conseil Départemental Pas-de-Calais</daobs:name>
+    <daobs:url>http://api.isogeo.com/services/csw/s/3f5cb018fe4e48dcac7f6039acd01962/c/44ae43fb7d4c40da99ed8eb9bf5d2833/ZKyGZvBoeonP1vIzCeAAwJqDc4HifEMRC2fH4sTg4dRh6cy4A5G9JC/GetRecords</daobs:url>
+    <daobs:nbOfRecordsPerPage>200</daobs:nbOfRecordsPerPage>
+  </daobs:harvester>
+  <daobs:harvester>
+    <daobs:uuid>51495</daobs:uuid>
+    <daobs:territory>GEONORDENVIRONNEMENT</daobs:territory>
+    <daobs:folder>GEONORDENVIRONNEMENT</daobs:folder>
+    <daobs:name>GéoNord Environnement</daobs:name>
+    <daobs:url>http://api.isogeo.com/services/csw/s/3f5cb018fe4e48dcac7f6039acd01962/c/67e1593a58b648158532b074e0c4d0fe/ZKyGZvBoeonP1vIzCeAAwJqDc4HifEMRC2fH4sTg4dRh6cy4A5G9JC/GetRecords</daobs:url>
+    <daobs:nbOfRecordsPerPage>200</daobs:nbOfRecordsPerPage>
+  </daobs:harvester>
+  <daobs:harvester>
+    <daobs:uuid>51427</daobs:uuid>
+    <daobs:territory>GEOGUYANE</daobs:territory>
+    <daobs:folder>GEOGUYANE</daobs:folder>
+    <daobs:name>Geoguyane</daobs:name>
+    <daobs:url>http://www.geoguyane.fr/geonetwork/srv/fre/csw?</daobs:url>
+    <daobs:nbOfRecordsPerPage>200</daobs:nbOfRecordsPerPage>
+  </daobs:harvester>
+  <daobs:harvester>
+    <daobs:uuid>51518</daobs:uuid>
+    <daobs:territory>CUCM</daobs:territory>
+    <daobs:folder>CUCM</daobs:folder>
+    <daobs:name>CUCM</daobs:name>
+    <daobs:url>http://api.isogeo.com/services/csw/s/8f0d8215ef954b9bb1bfe095ea3b3087/c/4e26282808214c7484ad035d3a72e85c/cj4iFol3QCp3vDI8vIHqxd-zUoVp0/GetRecords</daobs:url>
+    <daobs:nbOfRecordsPerPage>200</daobs:nbOfRecordsPerPage>
+  </daobs:harvester>
+  <daobs:harvester>
+    <daobs:uuid>51500</daobs:uuid>
+    <daobs:territory>GRANDDIJON</daobs:territory>
+    <daobs:folder>GRANDDIJON</daobs:folder>
+    <daobs:name>GrandDijon</daobs:name>
+    <daobs:url>http://api.isogeo.com/services/csw/s/0dd89e9ca2da40799a823b7ecad9813f/c/89da752224fd4163a9de778767880806/F4hlw72VJBEhv-fJ3fN7IQxnX1zc0/GetRecords</daobs:url>
+    <daobs:nbOfRecordsPerPage>200</daobs:nbOfRecordsPerPage>
+  </daobs:harvester>
+  <daobs:harvester>
+    <daobs:uuid>1002</daobs:uuid>
+    <daobs:territory>CATALOGUEIGNINSPIRE</daobs:territory>
+    <daobs:folder>CATALOGUEIGNINSPIRE</daobs:folder>
+    <daobs:name>Catalogue IGN INSPIRE</daobs:name>
+    <daobs:url>http://wxs.ign.fr/inspire/csw?</daobs:url>
+    <daobs:nbOfRecordsPerPage>200</daobs:nbOfRecordsPerPage>
+  </daobs:harvester>
+  <daobs:harvester>
+    <daobs:uuid>51437</daobs:uuid>
+    <daobs:territory>GEOSAS</daobs:territory>
+    <daobs:folder>GEOSAS</daobs:folder>
+    <daobs:name>geosas</daobs:name>
+    <daobs:url>http://geowww.agrocampus-ouest.fr/geonetwork/srv/fre/csw?</daobs:url>
+    <daobs:nbOfRecordsPerPage>200</daobs:nbOfRecordsPerPage>
+  </daobs:harvester>
+  <daobs:harvester>
+    <daobs:uuid>51502</daobs:uuid>
+    <daobs:territory>CONSEILREGIONALNORD-PASDECALAIS</daobs:territory>
+    <daobs:folder>CONSEILREGIONALNORD-PASDECALAIS</daobs:folder>
+    <daobs:name>Conseil Régional Nord-Pas de Calais</daobs:name>
+    <daobs:url>http://geosource.nordpasdecalais.fr/geosource/srv/fre/csw?</daobs:url>
+    <daobs:nbOfRecordsPerPage>200</daobs:nbOfRecordsPerPage>
+  </daobs:harvester>
+  <daobs:harvester>
+    <daobs:uuid>51472</daobs:uuid>
+    <daobs:territory>CEREMANORMANDIE-CENTRE</daobs:territory>
+    <daobs:folder>CEREMANORMANDIE-CENTRE</daobs:folder>
+    <daobs:name>CEREMA Normandie-Centre</daobs:name>
+    <daobs:url>http://www.mongeosource.fr/geosource/1111/fre/csw?</daobs:url>
+    <daobs:nbOfRecordsPerPage>200</daobs:nbOfRecordsPerPage>
+  </daobs:harvester>
+  <daobs:harvester>
+    <daobs:uuid>51428</daobs:uuid>
+    <daobs:territory>GEOSOURCE</daobs:territory>
+    <daobs:folder>GEOSOURCE</daobs:folder>
+    <daobs:name>geosource</daobs:name>
+    <daobs:url>http://metadata.carmencarto.fr/geosource/8/fre/csw?</daobs:url>
+    <daobs:nbOfRecordsPerPage>200</daobs:nbOfRecordsPerPage>
+  </daobs:harvester>
+  <daobs:harvester>
+    <daobs:uuid>1319</daobs:uuid>
+    <daobs:territory>GEONETWORKSIGLR-IDGLANGUEDOC-ROUSSILLON</daobs:territory>
+    <daobs:folder>GEONETWORKSIGLR-IDGLANGUEDOC-ROUSSILLON</daobs:folder>
+    <daobs:name>GeoNetwork SIG LR - IDG Languedoc-Roussillon</daobs:name>
+    <daobs:url>http://geocatalogue-ct-dev-siglr.ataraxie.fr:80/geonetwork/srv/fr/csw?</daobs:url>
+    <daobs:nbOfRecordsPerPage>200</daobs:nbOfRecordsPerPage>
+  </daobs:harvester>
+  <daobs:harvester>
+    <daobs:uuid>51543</daobs:uuid>
+    <daobs:territory>SIGESPDL</daobs:territory>
+    <daobs:folder>SIGESPDL</daobs:folder>
+    <daobs:name>SIGES PDL</daobs:name>
+    <daobs:url>http://metadata.carmencarto.fr/geosource/137/fre/csw?</daobs:url>
+    <daobs:nbOfRecordsPerPage>200</daobs:nbOfRecordsPerPage>
+  </daobs:harvester>
+  <daobs:harvester>
+    <daobs:uuid>51453</daobs:uuid>
+    <daobs:territory>OCA</daobs:territory>
+    <daobs:folder>OCA</daobs:folder>
+    <daobs:name>OCA</daobs:name>
+    <daobs:url>http://www.mongeosource.fr/geosource/1001/fre/csw?</daobs:url>
+    <daobs:nbOfRecordsPerPage>200</daobs:nbOfRecordsPerPage>
+  </daobs:harvester>
+  <daobs:harvester>
+    <daobs:uuid>51438</daobs:uuid>
+    <daobs:territory>GEOPLATEFORMECIGAL</daobs:territory>
+    <daobs:folder>GEOPLATEFORMECIGAL</daobs:folder>
+    <daobs:name>Géoplateforme CIGAL</daobs:name>
+    <daobs:url>https://www.cigalsace.org/geonetwork/srv/fre/csw-geocatalogue?</daobs:url>
+    <daobs:nbOfRecordsPerPage>200</daobs:nbOfRecordsPerPage>
+  </daobs:harvester>
+  <daobs:harvester>
+    <daobs:uuid>51460</daobs:uuid>
+    <daobs:territory>PPIGE</daobs:territory>
+    <daobs:folder>PPIGE</daobs:folder>
+    <daobs:name>PPIGE</daobs:name>
+    <daobs:url>http://api.isogeo.com/services/csw/s/3f5cb018fe4e48dcac7f6039acd01962/c/cd8aeeede5324b54900264d6c5987d04/ZKyGZvBoeonP1vIzCeAAwJqDc4HifEMRC2fH4sTg4dRh6cy4A5G9JC/GetRecords</daobs:url>
+    <daobs:nbOfRecordsPerPage>200</daobs:nbOfRecordsPerPage>
+  </daobs:harvester>
+  <daobs:harvester>
+    <daobs:uuid>51575</daobs:uuid>
+    <daobs:territory>GEO-NUNAVIK</daobs:territory>
+    <daobs:folder>GEO-NUNAVIK</daobs:folder>
+    <daobs:name>Geo-Nunavik</daobs:name>
+    <daobs:url>http://ccwbvps01.in2p3.fr:8080/geo-nunavik/srv/fre/csw?</daobs:url>
+    <daobs:nbOfRecordsPerPage>200</daobs:nbOfRecordsPerPage>
+  </daobs:harvester>
+  <daobs:harvester>
+    <daobs:uuid>51546</daobs:uuid>
+    <daobs:territory>SIGESPOC</daobs:territory>
+    <daobs:folder>SIGESPOC</daobs:folder>
+    <daobs:name>SIGES POC</daobs:name>
+    <daobs:url>http://metadata.carmencarto.fr/geosource/189/fre/csw?</daobs:url>
+    <daobs:nbOfRecordsPerPage>200</daobs:nbOfRecordsPerPage>
+  </daobs:harvester>
+  <daobs:harvester>
+    <daobs:uuid>51566</daobs:uuid>
+    <daobs:territory>CAGB</daobs:territory>
+    <daobs:folder>CAGB</daobs:folder>
+    <daobs:name>CAGB</daobs:name>
+    <daobs:url>http://www.mongeosource.fr/geosource/1244/fre/csw?</daobs:url>
+    <daobs:nbOfRecordsPerPage>200</daobs:nbOfRecordsPerPage>
+  </daobs:harvester>
+  <daobs:harvester>
+    <daobs:uuid>51547</daobs:uuid>
+    <daobs:territory>SIGESSN</daobs:territory>
+    <daobs:folder>SIGESSN</daobs:folder>
+    <daobs:name>SIGES SN</daobs:name>
+    <daobs:url>http://metadata.carmencarto.fr/geosource/198/fre/csw?</daobs:url>
+    <daobs:nbOfRecordsPerPage>200</daobs:nbOfRecordsPerPage>
+  </daobs:harvester>
+  <daobs:harvester>
+    <daobs:uuid>550</daobs:uuid>
+    <daobs:territory>CARMEN(DREALCENTREVALDELOIRE)</daobs:territory>
+    <daobs:folder>CARMEN(DREALCENTREVALDELOIRE)</daobs:folder>
+    <daobs:name>CARMEN (DREAL Centre Val de Loire)</daobs:name>
+    <daobs:url>http://metadata.carmencarto.fr/geosource/11/fre/csw?</daobs:url>
+    <daobs:nbOfRecordsPerPage>200</daobs:nbOfRecordsPerPage>
+  </daobs:harvester>
+  <daobs:harvester>
+    <daobs:uuid>51448</daobs:uuid>
+    <daobs:territory>ISOGEO-GEOCATALOGUE</daobs:territory>
+    <daobs:folder>ISOGEO-GEOCATALOGUE</daobs:folder>
+    <daobs:name>Isogéo-GéoCatalogue</daobs:name>
+    <daobs:url>http://api.isogeo.com/services/csw/s/f7a8cf4c1d284ab3bcdc9d139c0ac5a2/c/666c629fe106430bbf4a3d9eb6917a2b/TGQvsDA3ve9UAOgGdSvUtBJn8f0h0/GetRecords</daobs:url>
+    <daobs:nbOfRecordsPerPage>200</daobs:nbOfRecordsPerPage>
+  </daobs:harvester>
+  <daobs:harvester>
+    <daobs:uuid>51545</daobs:uuid>
+    <daobs:territory>SIGESBRE</daobs:territory>
+    <daobs:folder>SIGESBRE</daobs:folder>
+    <daobs:name>SIGES BRE</daobs:name>
+    <daobs:url>http://metadata.carmencarto.fr/geosource/152/fre/csw?</daobs:url>
+    <daobs:nbOfRecordsPerPage>200</daobs:nbOfRecordsPerPage>
+  </daobs:harvester>
+  <daobs:harvester>
+    <daobs:uuid>51540</daobs:uuid>
+    <daobs:territory>SIGESAQUI</daobs:territory>
+    <daobs:folder>SIGESAQUI</daobs:folder>
+    <daobs:name>SIGES AQUI</daobs:name>
+    <daobs:url>http://metadata.carmencarto.fr/geosource/120/fre/csw?</daobs:url>
+    <daobs:nbOfRecordsPerPage>200</daobs:nbOfRecordsPerPage>
+  </daobs:harvester>
+  <daobs:harvester>
+    <daobs:uuid>51458</daobs:uuid>
+    <daobs:territory>MISSIONBASSINMINIER</daobs:territory>
+    <daobs:folder>MISSIONBASSINMINIER</daobs:folder>
+    <daobs:name>Mission Bassin Minier</daobs:name>
+    <daobs:url>http://api.isogeo.com/services/csw/s/cc1ba385918d40cc8078063121873550/c/8628eb8c60744132b1e7aa509c7add84/m0_ZBCtJU3nJj1S3Q2FIAa6u_KZ70/GetRecords</daobs:url>
+    <daobs:nbOfRecordsPerPage>200</daobs:nbOfRecordsPerPage>
+  </daobs:harvester>
+  <daobs:harvester>
+    <daobs:uuid>51542</daobs:uuid>
+    <daobs:territory>SIGESNPC</daobs:territory>
+    <daobs:folder>SIGESNPC</daobs:folder>
+    <daobs:name>SIGES NPC</daobs:name>
+    <daobs:url>http://metadata.carmencarto.fr/geosource/122/fre/csw?</daobs:url>
+    <daobs:nbOfRecordsPerPage>200</daobs:nbOfRecordsPerPage>
+  </daobs:harvester>
+  <daobs:harvester>
+    <daobs:uuid>51552</daobs:uuid>
+    <daobs:territory>MAAFDGER</daobs:territory>
+    <daobs:folder>MAAFDGER</daobs:folder>
+    <daobs:name>MAAF DGER</daobs:name>
+    <daobs:url>http://www.mongeosource.fr/geosource/1230/fre/csw?</daobs:url>
+    <daobs:nbOfRecordsPerPage>200</daobs:nbOfRecordsPerPage>
+  </daobs:harvester>
+  <daobs:harvester>
+    <daobs:uuid>51457</daobs:uuid>
+    <daobs:territory>DRAAFNORD-PAS-DE-CALAIS</daobs:territory>
+    <daobs:folder>DRAAFNORD-PAS-DE-CALAIS</daobs:folder>
+    <daobs:name>DRAAF Nord-Pas-de-Calais</daobs:name>
+    <daobs:url>http://api.isogeo.com/services/csw/s/cc1ba385918d40cc8078063121873550/c/dd6ed2a65c0d43d99f65e4b4b8ff0509/m0_ZBCtJU3nJj1S3Q2FIAa6u_KZ70/GetRecords</daobs:url>
+    <daobs:nbOfRecordsPerPage>200</daobs:nbOfRecordsPerPage>
+  </daobs:harvester>
+  <daobs:harvester>
+    <daobs:uuid>51494</daobs:uuid>
+    <daobs:territory>GEONORD</daobs:territory>
+    <daobs:folder>GEONORD</daobs:folder>
+    <daobs:name>GéoNord</daobs:name>
+    <daobs:url>http://api.isogeo.com/services/csw/s/3f5cb018fe4e48dcac7f6039acd01962/c/46403dae5982449da7eb0fc21fc380e0/ZKyGZvBoeonP1vIzCeAAwJqDc4HifEMRC2fH4sTg4dRh6cy4A5G9JC/GetRecords</daobs:url>
+    <daobs:nbOfRecordsPerPage>200</daobs:nbOfRecordsPerPage>
+  </daobs:harvester>
+  <daobs:harvester>
+    <daobs:uuid>400</daobs:uuid>
+    <daobs:territory>CRIGE-PACA</daobs:territory>
+    <daobs:folder>CRIGE-PACA</daobs:folder>
+    <daobs:name>CRIGE-PACA</daobs:name>
+    <daobs:url>http://geocatalogue.crige-paca.org/geonetwork/srv/fr/csw?</daobs:url>
+    <daobs:nbOfRecordsPerPage>200</daobs:nbOfRecordsPerPage>
+  </daobs:harvester>
+  <daobs:harvester>
+    <daobs:uuid>602</daobs:uuid>
+    <daobs:territory>INAO</daobs:territory>
+    <daobs:folder>INAO</daobs:folder>
+    <daobs:name>INAO</daobs:name>
+    <daobs:url>http://metadata.carmencarto.fr/geosource/110/fre/csw?</daobs:url>
+    <daobs:nbOfRecordsPerPage>200</daobs:nbOfRecordsPerPage>
+  </daobs:harvester>
+  <daobs:harvester>
+    <daobs:uuid>852</daobs:uuid>
+    <daobs:territory>PORTAILDEBASSINADOUR-GARONNESIE</daobs:territory>
+    <daobs:folder>PORTAILDEBASSINADOUR-GARONNESIE</daobs:folder>
+    <daobs:name>Portail de Bassin Adour-Garonne SIE</daobs:name>
+    <daobs:url>http://catalogue.adour-garonne.eaufrance.fr/catalog/srv/fre/csw-sie-seul?</daobs:url>
+    <daobs:nbOfRecordsPerPage>200</daobs:nbOfRecordsPerPage>
+  </daobs:harvester>
+  <daobs:harvester>
+    <daobs:uuid>51544</daobs:uuid>
+    <daobs:territory>SIGESMP</daobs:territory>
+    <daobs:folder>SIGESMP</daobs:folder>
+    <daobs:name>SIGES MP</daobs:name>
+    <daobs:url>http://metadata.carmencarto.fr/geosource/151/fre/csw?</daobs:url>
+    <daobs:nbOfRecordsPerPage>200</daobs:nbOfRecordsPerPage>
+  </daobs:harvester>
+  <daobs:harvester>
+    <daobs:uuid>51533</daobs:uuid>
+    <daobs:territory>IDCNP</daobs:territory>
+    <daobs:folder>IDCNP</daobs:folder>
+    <daobs:name>IDCNP</daobs:name>
+    <daobs:url>http://inventaire.naturefrance.fr/geosource/srv/fre/csw?</daobs:url>
+    <daobs:nbOfRecordsPerPage>200</daobs:nbOfRecordsPerPage>
+  </daobs:harvester>
+  <daobs:harvester>
+    <daobs:uuid>51422</daobs:uuid>
+    <daobs:territory>PIGMA</daobs:territory>
+    <daobs:folder>PIGMA</daobs:folder>
+    <daobs:name>PIGMA</daobs:name>
+    <daobs:url>http://ids.pigma.org/geonetwork/srv/fre/csw-inspire?</daobs:url>
+    <daobs:nbOfRecordsPerPage>200</daobs:nbOfRecordsPerPage>
+  </daobs:harvester>
+  <daobs:harvester>
+    <daobs:uuid>459</daobs:uuid>
+    <daobs:territory>GEO-CENTRE</daobs:territory>
+    <daobs:folder>GEO-CENTRE</daobs:folder>
+    <daobs:name>Géo-Centre</daobs:name>
+    <daobs:url>http://catalogue.geo-centre.fr/geonetwork/srv/fre/csw-local?</daobs:url>
+    <daobs:nbOfRecordsPerPage>200</daobs:nbOfRecordsPerPage>
+  </daobs:harvester>
+  <daobs:harvester>
+    <daobs:uuid>617</daobs:uuid>
+    <daobs:territory>GEOBRETAGNE</daobs:territory>
+    <daobs:folder>GEOBRETAGNE</daobs:folder>
+    <daobs:name>geobretagne</daobs:name>
+    <daobs:url>http://geobretagne.fr/geonetwork/srv/fre/csw?SERVICE=CSW&amp;VERSION=2.0.2</daobs:url>
+    <daobs:nbOfRecordsPerPage>200</daobs:nbOfRecordsPerPage>
+  </daobs:harvester>
+  <daobs:harvester>
+    <daobs:uuid>51505</daobs:uuid>
+    <daobs:territory>CONSEILDEPARTEMENTALDELAMANCHE</daobs:territory>
+    <daobs:folder>CONSEILDEPARTEMENTALDELAMANCHE</daobs:folder>
+    <daobs:name>Conseil Departemental de la Manche</daobs:name>
+    <daobs:url>http://catalogue.geonormandie.fr/geonetwork/srv/fre/csw-cd50?</daobs:url>
+    <daobs:nbOfRecordsPerPage>200</daobs:nbOfRecordsPerPage>
+  </daobs:harvester>
+  <daobs:harvester>
+    <daobs:uuid>51489</daobs:uuid>
+    <daobs:territory>SMICA</daobs:territory>
+    <daobs:folder>SMICA</daobs:folder>
+    <daobs:name>SMICA</daobs:name>
+    <daobs:url>http://ids.e-aveyron.fr/proxy/geonetwork-cat?CONSTRAINT_LANGUAGE_VERSION=1.1.0</daobs:url>
+    <daobs:nbOfRecordsPerPage>200</daobs:nbOfRecordsPerPage>
+  </daobs:harvester>
+  <daobs:harvester>
+    <daobs:uuid>51541</daobs:uuid>
+    <daobs:territory>SIGESCENTRE</daobs:territory>
+    <daobs:folder>SIGESCENTRE</daobs:folder>
+    <daobs:name>SIGES CENTRE</daobs:name>
+    <daobs:url>http://metadata.carmencarto.fr/geosource/121/fre/csw?</daobs:url>
+    <daobs:nbOfRecordsPerPage>200</daobs:nbOfRecordsPerPage>
+  </daobs:harvester>
+  <daobs:harvester>
+    <daobs:uuid>51412</daobs:uuid>
+    <daobs:territory>DREALNORD-PAS-DE-CALAIS</daobs:territory>
+    <daobs:folder>DREALNORD-PAS-DE-CALAIS</daobs:folder>
+    <daobs:name>DREAL Nord-Pas-de-Calais</daobs:name>
+    <daobs:url>http://metadata.carmencarto.fr/geosource/24/fre/csw?</daobs:url>
+    <daobs:nbOfRecordsPerPage>200</daobs:nbOfRecordsPerPage>
+  </daobs:harvester>
+  <daobs:harvester>
+    <daobs:uuid>51548</daobs:uuid>
+    <daobs:territory>SIGESALS</daobs:territory>
+    <daobs:folder>SIGESALS</daobs:folder>
+    <daobs:name>SIGES ALS</daobs:name>
+    <daobs:url>http://metadata.carmencarto.fr/geosource/202/fre/csw?</daobs:url>
+    <daobs:nbOfRecordsPerPage>200</daobs:nbOfRecordsPerPage>
+  </daobs:harvester>
+  <daobs:harvester>
+    <daobs:uuid>51549</daobs:uuid>
+    <daobs:territory>SIGESRM</daobs:territory>
+    <daobs:folder>SIGESRM</daobs:folder>
+    <daobs:name>SIGES RM</daobs:name>
+    <daobs:url>http://metadata.carmencarto.fr/geosource/213/fre/csw?</daobs:url>
+    <daobs:nbOfRecordsPerPage>200</daobs:nbOfRecordsPerPage>
+  </daobs:harvester>
+  <daobs:harvester>
+    <daobs:uuid>51553</daobs:uuid>
+    <daobs:territory>CATALOGUEDESPARCSNATIONAUX</daobs:territory>
+    <daobs:folder>CATALOGUEDESPARCSNATIONAUX</daobs:folder>
+    <daobs:name>catalogue des parcs nationaux</daobs:name>
+    <daobs:url>http://extranet.parcnational.fr/catalogue/pnx/fre/csw?</daobs:url>
+    <daobs:nbOfRecordsPerPage>200</daobs:nbOfRecordsPerPage>
+  </daobs:harvester>
+  <daobs:harvester>
+    <daobs:uuid>51571</daobs:uuid>
+    <daobs:territory>GEO-OYAPOCK</daobs:territory>
+    <daobs:folder>GEO-OYAPOCK</daobs:folder>
+    <daobs:name>Geo-Oyapock</daobs:name>
+    <daobs:url>http://ccwbvps01.in2p3.fr:8080/geo-oyapock/srv/fre/csw?</daobs:url>
+    <daobs:nbOfRecordsPerPage>200</daobs:nbOfRecordsPerPage>
+  </daobs:harvester>
+  <daobs:harvester>
+    <daobs:uuid>51528</daobs:uuid>
+    <daobs:territory>PARCNATURELREGIONALNORMANDIEMAINE</daobs:territory>
+    <daobs:folder>PARCNATURELREGIONALNORMANDIEMAINE</daobs:folder>
+    <daobs:name>Parc Naturel Regional Normandie Maine</daobs:name>
+    <daobs:url>http://catalogue.geonormandie.fr/geonetwork/srv/fre/csw-pnrnm?</daobs:url>
+    <daobs:nbOfRecordsPerPage>200</daobs:nbOfRecordsPerPage>
+  </daobs:harvester>
+  <daobs:harvester>
+    <daobs:uuid>51537</daobs:uuid>
+    <daobs:territory>GEOAGGLOCATALOGUE</daobs:territory>
+    <daobs:folder>GEOAGGLOCATALOGUE</daobs:folder>
+    <daobs:name>GeoAgglo Catalogue</daobs:name>
+    <daobs:url>http://www.geoagglo-thionville.fr:8080/geosource/srv/fre/csw?</daobs:url>
+    <daobs:nbOfRecordsPerPage>200</daobs:nbOfRecordsPerPage>
+  </daobs:harvester>
+  <daobs:harvester>
+    <daobs:uuid>51507</daobs:uuid>
+    <daobs:territory>GEOSOURCE</daobs:territory>
+    <daobs:folder>GEOSOURCE</daobs:folder>
+    <daobs:name>Géosource</daobs:name>
+    <daobs:url>http://www.mongeosource.fr/geosource/1010/fre/csw?</daobs:url>
+    <daobs:nbOfRecordsPerPage>200</daobs:nbOfRecordsPerPage>
+  </daobs:harvester>
+  <daobs:harvester>
+    <daobs:uuid>51605</daobs:uuid>
+    <daobs:territory>ORAMIP</daobs:territory>
+    <daobs:folder>ORAMIP</daobs:folder>
+    <daobs:name>ORAMIP</daobs:name>
+    <daobs:url>http://www.mongeosource.fr/geosource/1193/fre/csw?</daobs:url>
+    <daobs:nbOfRecordsPerPage>200</daobs:nbOfRecordsPerPage>
+  </daobs:harvester>
+  <daobs:harvester>
+    <daobs:uuid>51607</daobs:uuid>
+    <daobs:territory>CD92-MOISSONNE</daobs:territory>
+    <daobs:folder>CD92-MOISSONNE</daobs:folder>
+    <daobs:name>CD92-MOISSONNE</daobs:name>
+    <daobs:url>http://www.mongeosource.fr/geosource/1197/fre/csw?</daobs:url>
+    <daobs:nbOfRecordsPerPage>200</daobs:nbOfRecordsPerPage>
+  </daobs:harvester>
+  <daobs:harvester>
+    <daobs:uuid>51485</daobs:uuid>
+    <daobs:territory>GEO-IDE-CAT</daobs:territory>
+    <daobs:folder>GEO-IDE-CAT</daobs:folder>
+    <daobs:name>GEO-IDE-CAT</daobs:name>
+    <daobs:url>http://catalogue.geo-ide.developpement-durable.gouv.fr/catalogue/srv/fre/csw-moissonnable-ds-1?</daobs:url>
+    <daobs:nbOfRecordsPerPage>200</daobs:nbOfRecordsPerPage>
+  </daobs:harvester>
+  <daobs:harvester>
+    <daobs:uuid>51589</daobs:uuid>
+    <daobs:territory>SDEGM</daobs:territory>
+    <daobs:folder>SDEGM</daobs:folder>
+    <daobs:name>SDEGM</daobs:name>
+    <daobs:url>http://api.isogeo.com/services/csw/s/029547d707c94fab9f27210584a1016a/c/2a4ce7ecbad343e4b24bb6de6b1c3abd/FVQXEfeoDlHFVB-KbeqVHKKPpZiF0/GetRecords</daobs:url>
+    <daobs:nbOfRecordsPerPage>200</daobs:nbOfRecordsPerPage>
+  </daobs:harvester>
+  <daobs:harvester>
+    <daobs:uuid>51482</daobs:uuid>
+    <daobs:territory>GEOPICARDIE</daobs:territory>
+    <daobs:folder>GEOPICARDIE</daobs:folder>
+    <daobs:name>GéoPicardie</daobs:name>
+    <daobs:url>http://www.geopicardie.fr/geonetwork/srv/fre/csw-for-harvesters?</daobs:url>
+    <daobs:nbOfRecordsPerPage>200</daobs:nbOfRecordsPerPage>
+  </daobs:harvester>
+  <daobs:harvester>
+    <daobs:uuid>51604</daobs:uuid>
+    <daobs:territory>GUYANESIGHTTPS</daobs:territory>
+    <daobs:folder>GUYANESIGHTTPS</daobs:folder>
+    <daobs:name>Guyane SIG HTTPS</daobs:name>
+    <daobs:url>https://catalogue.guyane-sig.fr/geonetwork/srv/fre/csw?</daobs:url>
+    <daobs:nbOfRecordsPerPage>200</daobs:nbOfRecordsPerPage>
+  </daobs:harvester>
+  <daobs:harvester>
+    <daobs:uuid>51585</daobs:uuid>
+    <daobs:territory>COMMUNAUTEDECOMMUNESCOEURCOTEFLEURIE</daobs:territory>
+    <daobs:folder>COMMUNAUTEDECOMMUNESCOEURCOTEFLEURIE</daobs:folder>
+    <daobs:name>Communauté de Communes Coeur Côte Fleurie</daobs:name>
+    <daobs:url>https://sig.coeurcotefleurie.org/geosource/srv/fre/csw-inspire?SERVICE=CSW</daobs:url>
+    <daobs:nbOfRecordsPerPage>200</daobs:nbOfRecordsPerPage>
+  </daobs:harvester>
+  <daobs:harvester>
+    <daobs:uuid>51521</daobs:uuid>
+    <daobs:territory>DREALALSACE</daobs:territory>
+    <daobs:folder>DREALALSACE</daobs:folder>
+    <daobs:name>DREAL Alsace</daobs:name>
+    <daobs:url>http://www.mongeosource.fr/geosource/1245/fre/csw?</daobs:url>
+    <daobs:nbOfRecordsPerPage>200</daobs:nbOfRecordsPerPage>
+  </daobs:harvester>
+  <daobs:harvester>
+    <daobs:uuid>51609</daobs:uuid>
+    <daobs:territory>CCPL</daobs:territory>
+    <daobs:folder>CCPL</daobs:folder>
+    <daobs:name>CCPL</daobs:name>
+    <daobs:url>http://services.api.isogeo.com:80/csw/s/029547d707c94fab9f27210584a1016a/c/a66b7a6c761542399a25e9cb8231e7be/FVQXEfeoDlHFVB-KbeqVHKKPpZiF0/GetRecords</daobs:url>
+    <daobs:nbOfRecordsPerPage>200</daobs:nbOfRecordsPerPage>
+  </daobs:harvester>
+  <daobs:harvester>
+    <daobs:uuid>51618</daobs:uuid>
+    <daobs:territory>METROPOLE</daobs:territory>
+    <daobs:folder>METROPOLE</daobs:folder>
+    <daobs:name>Metropole</daobs:name>
+    <daobs:url>http://www.atlasante.fr/geonetwork/srv/fre/csw-metropole?</daobs:url>
+    <daobs:nbOfRecordsPerPage>200</daobs:nbOfRecordsPerPage>
+  </daobs:harvester>
+  <daobs:harvester>
+    <daobs:uuid>1302</daobs:uuid>
+    <daobs:territory>ODDC</daobs:territory>
+    <daobs:folder>ODDC</daobs:folder>
+    <daobs:name>oddc</daobs:name>
+    <daobs:url>http://195.221.141.2/excat/csw?</daobs:url>
+    <daobs:nbOfRecordsPerPage>200</daobs:nbOfRecordsPerPage>
+  </daobs:harvester>
+  <daobs:harvester>
+    <daobs:uuid>51573</daobs:uuid>
+    <daobs:territory>GEO-TESSEKERE</daobs:territory>
+    <daobs:folder>GEO-TESSEKERE</daobs:folder>
+    <daobs:name>Geo-Tessekere</daobs:name>
+    <daobs:url>http://ccwbvps01.in2p3.fr:8080/geo-tessekere/srv/fre/csw?</daobs:url>
+    <daobs:nbOfRecordsPerPage>200</daobs:nbOfRecordsPerPage>
+  </daobs:harvester>
+  <daobs:harvester>
+    <daobs:uuid>51493</daobs:uuid>
+    <daobs:territory>RBV</daobs:territory>
+    <daobs:folder>RBV</daobs:folder>
+    <daobs:name>RBV</daobs:name>
+    <daobs:url>http://sedoo.sedoo.fr/geosource/srv/fre/csw-rbv-geocatalogue?</daobs:url>
+    <daobs:nbOfRecordsPerPage>200</daobs:nbOfRecordsPerPage>
+  </daobs:harvester>
+  <daobs:harvester>
+    <daobs:uuid>51508</daobs:uuid>
+    <daobs:territory>GEO.VALDEMARNE.FR</daobs:territory>
+    <daobs:folder>GEO.VALDEMARNE.FR</daobs:folder>
+    <daobs:name>Géo.valdemarne.fr</daobs:name>
+    <daobs:url>https://geo.valdemarne.fr/geosource/srv/eng/csw?</daobs:url>
+    <daobs:nbOfRecordsPerPage>200</daobs:nbOfRecordsPerPage>
+  </daobs:harvester>
+  <daobs:harvester>
+    <daobs:uuid>51414</daobs:uuid>
+    <daobs:territory>SIGFEDERATIF</daobs:territory>
+    <daobs:folder>SIGFEDERATIF</daobs:folder>
+    <daobs:name>SIG fédératif</daobs:name>
+    <daobs:url>http://www.vnf.fr/sigfed/csw?</daobs:url>
+    <daobs:nbOfRecordsPerPage>200</daobs:nbOfRecordsPerPage>
+  </daobs:harvester>
+  <daobs:harvester>
+    <daobs:uuid>51614</daobs:uuid>
+    <daobs:territory>CG9292</daobs:territory>
+    <daobs:folder>CG9292</daobs:folder>
+    <daobs:name>CG9292</daobs:name>
+    <daobs:url>http://www.mongeosource.fr/geosource/1197/fre/csw?</daobs:url>
+    <daobs:nbOfRecordsPerPage>200</daobs:nbOfRecordsPerPage>
+  </daobs:harvester>
+  <daobs:harvester>
+    <daobs:uuid>51523</daobs:uuid>
+    <daobs:territory>CSWCRETEIL</daobs:territory>
+    <daobs:folder>CSWCRETEIL</daobs:folder>
+    <daobs:name>CSW Créteil</daobs:name>
+    <daobs:url>http://api.isogeo.com/services/csw/s/cb09209441df456a9aaf1c7dfcc229e7/c/a2cf2562a8d94232906914096b71aac6/hhWTI-dXS5xloE2ibGjcAqKQ8H-F0/GetRecords</daobs:url>
+    <daobs:nbOfRecordsPerPage>200</daobs:nbOfRecordsPerPage>
+  </daobs:harvester>
+  <daobs:harvester>
+    <daobs:uuid>51593</daobs:uuid>
+    <daobs:territory>COMMUNAUTEURBAINEDALENCON</daobs:territory>
+    <daobs:folder>COMMUNAUTEURBAINEDALENCON</daobs:folder>
+    <daobs:name>Communaute Urbaine d'Alencon</daobs:name>
+    <daobs:url>http://catalogue.geonormandie.fr/geonetwork/srv/fre/csw-cua?</daobs:url>
+    <daobs:nbOfRecordsPerPage>200</daobs:nbOfRecordsPerPage>
+  </daobs:harvester>
+  <daobs:harvester>
+    <daobs:uuid>51577</daobs:uuid>
+    <daobs:territory>LITTMED</daobs:territory>
+    <daobs:folder>LITTMED</daobs:folder>
+    <daobs:name>LittMed</daobs:name>
+    <daobs:url>http://geonetohmbmp.cerege.fr/geonetworklittmed/srv/en/csw?</daobs:url>
+    <daobs:nbOfRecordsPerPage>200</daobs:nbOfRecordsPerPage>
+  </daobs:harvester>
+  <daobs:harvester>
+    <daobs:uuid>51613</daobs:uuid>
+    <daobs:territory>CD92</daobs:territory>
+    <daobs:folder>CD92</daobs:folder>
+    <daobs:name>CD92</daobs:name>
+    <daobs:url>http://www.mongeosource.fr/geosource/1197/fre/csw-moissonnees?</daobs:url>
+    <daobs:nbOfRecordsPerPage>200</daobs:nbOfRecordsPerPage>
+  </daobs:harvester>
+  <daobs:harvester>
+    <daobs:uuid>51590</daobs:uuid>
+    <daobs:territory>OHMPYRENEESHAUTVICDESSOS</daobs:territory>
+    <daobs:folder>OHMPYRENEESHAUTVICDESSOS</daobs:folder>
+    <daobs:name>OHM Pyrénées haut Vicdessos</daobs:name>
+    <daobs:url>http://ohmpyr-cat.univ-tlse2.fr/geonetwork/srv/fre/csw?</daobs:url>
+    <daobs:nbOfRecordsPerPage>200</daobs:nbOfRecordsPerPage>
+  </daobs:harvester>
+  <daobs:harvester>
+    <daobs:uuid>51582</daobs:uuid>
+    <daobs:territory>ADELIE</daobs:territory>
+    <daobs:folder>ADELIE</daobs:folder>
+    <daobs:name>Adelie</daobs:name>
+    <daobs:url>http://adelie.application.developpement-durable.gouv.fr</daobs:url>
+    <daobs:nbOfRecordsPerPage>200</daobs:nbOfRecordsPerPage>
+  </daobs:harvester>
+  <daobs:harvester>
+    <daobs:uuid>51451</daobs:uuid>
+    <daobs:territory>MIPYGEO</daobs:territory>
+    <daobs:folder>MIPYGEO</daobs:folder>
+    <daobs:name>mipygeo</daobs:name>
+    <daobs:url>http://www.mipygeo.fr/geonetwork/srv/fre/csw-geocatalogue?</daobs:url>
+    <daobs:nbOfRecordsPerPage>200</daobs:nbOfRecordsPerPage>
+  </daobs:harvester>
+  <daobs:harvester>
+    <daobs:uuid>51606</daobs:uuid>
+    <daobs:territory>BDT32</daobs:territory>
+    <daobs:folder>BDT32</daobs:folder>
+    <daobs:name>BDT32</daobs:name>
+    <daobs:url>http://bdt.gers.fr/proxy/geonetwork-cat?CONSTRAINT_LANGUAGE_VERSION=1.1.0</daobs:url>
+    <daobs:nbOfRecordsPerPage>200</daobs:nbOfRecordsPerPage>
+  </daobs:harvester>
+  <daobs:harvester>
+    <daobs:uuid>51555</daobs:uuid>
+    <daobs:territory>CD53</daobs:territory>
+    <daobs:folder>CD53</daobs:folder>
+    <daobs:name>CD53</daobs:name>
+    <daobs:url>http://api.isogeo.com/services/csw/s/029547d707c94fab9f27210584a1016a/c/4a10440749c349f89dd533e0586fb7c7/FVQXEfeoDlHFVB-KbeqVHKKPpZiF0/GetRecords</daobs:url>
+    <daobs:nbOfRecordsPerPage>200</daobs:nbOfRecordsPerPage>
+  </daobs:harvester>
+  <daobs:harvester>
+    <daobs:uuid>51551</daobs:uuid>
+    <daobs:territory>WEBSERVICE-ENERGY</daobs:territory>
+    <daobs:folder>WEBSERVICE-ENERGY</daobs:folder>
+    <daobs:name>Webservice-Energy</daobs:name>
+    <daobs:url>http://geocatalog.webservice-energy.org/geonetwork/srv/eng/csw?</daobs:url>
+    <daobs:nbOfRecordsPerPage>200</daobs:nbOfRecordsPerPage>
+  </daobs:harvester>
+  <daobs:harvester>
+    <daobs:uuid>603</daobs:uuid>
+    <daobs:territory>IFREMER-SEXTANT</daobs:territory>
+    <daobs:folder>IFREMER-SEXTANT</daobs:folder>
+    <daobs:name>Ifremer-Sextant</daobs:name>
+    <daobs:url>http://sextant.ifremer.fr/geonetwork/srv/fre/csw-GEOCATALOGUE</daobs:url>
+    <daobs:nbOfRecordsPerPage>200</daobs:nbOfRecordsPerPage>
+  </daobs:harvester>
+  <daobs:harvester>
+    <daobs:uuid>51569</daobs:uuid>
+    <daobs:territory>GEOESTARREJA</daobs:territory>
+    <daobs:folder>GEOESTARREJA</daobs:folder>
+    <daobs:name>Geo Estarreja</daobs:name>
+    <daobs:url>http://ccwbvps01.in2p3.fr:8080/geo-estarreja/srv/fre/csw?</daobs:url>
+    <daobs:nbOfRecordsPerPage>200</daobs:nbOfRecordsPerPage>
+  </daobs:harvester>
+  <daobs:harvester>
+    <daobs:uuid>651</daobs:uuid>
+    <daobs:territory>CG92</daobs:territory>
+    <daobs:folder>CG92</daobs:folder>
+    <daobs:name>CG92</daobs:name>
+    <daobs:url>http://www.mongeosource.fr/geosource/1012/fre/csw?</daobs:url>
+    <daobs:nbOfRecordsPerPage>200</daobs:nbOfRecordsPerPage>
+  </daobs:harvester>
+  <daobs:harvester>
+    <daobs:uuid>51463</daobs:uuid>
+    <daobs:territory>CARMEN_DRIEE_18</daobs:territory>
+    <daobs:folder>CARMEN_DRIEE_18</daobs:folder>
+    <daobs:name>Carmen_Driee_18</daobs:name>
+    <daobs:url>http://metadata.carmencarto.fr/geosource/18/fre/csw?</daobs:url>
+    <daobs:nbOfRecordsPerPage>200</daobs:nbOfRecordsPerPage>
+  </daobs:harvester>
+  <daobs:harvester>
+    <daobs:uuid>51442</daobs:uuid>
+    <daobs:territory>CRAIG</daobs:territory>
+    <daobs:folder>CRAIG</daobs:folder>
+    <daobs:name>CRAIG</daobs:name>
+    <daobs:url>http://ids.craig.fr/geocat/srv/fre/csw-geocatalogue?</daobs:url>
+    <daobs:nbOfRecordsPerPage>200</daobs:nbOfRecordsPerPage>
+  </daobs:harvester>
+  <daobs:harvester>
+    <daobs:uuid>51583</daobs:uuid>
+    <daobs:territory>ELVIS</daobs:territory>
+    <daobs:folder>ELVIS</daobs:folder>
+    <daobs:name>Elvis</daobs:name>
+    <daobs:url>http://elvis.ens-lyon.fr/geonetwork/srv/fre/csw?</daobs:url>
+    <daobs:nbOfRecordsPerPage>200</daobs:nbOfRecordsPerPage>
+  </daobs:harvester>
+  <daobs:harvester>
+    <daobs:uuid>51574</daobs:uuid>
+    <daobs:territory>GEO-PAYSDEBITCHE</daobs:territory>
+    <daobs:folder>GEO-PAYSDEBITCHE</daobs:folder>
+    <daobs:name>Geo-PaysDeBitche</daobs:name>
+    <daobs:url>http://ccwbvps01.in2p3.fr:8080/geo-paysdebitche/srv/fre/csw?</daobs:url>
+    <daobs:nbOfRecordsPerPage>200</daobs:nbOfRecordsPerPage>
+  </daobs:harvester>
+  <daobs:harvester>
+    <daobs:uuid>51572</daobs:uuid>
+    <daobs:territory>GEO-PIMACOUNTY</daobs:territory>
+    <daobs:folder>GEO-PIMACOUNTY</daobs:folder>
+    <daobs:name>Geo-PimaCounty</daobs:name>
+    <daobs:url>http://ccwbvps01.in2p3.fr:8080/geo-pimacounty/srv/fre/csw?</daobs:url>
+    <daobs:nbOfRecordsPerPage>200</daobs:nbOfRecordsPerPage>
+  </daobs:harvester>
+  <daobs:harvester>
+    <daobs:uuid>51588</daobs:uuid>
+    <daobs:territory>SDIS53</daobs:territory>
+    <daobs:folder>SDIS53</daobs:folder>
+    <daobs:name>SDIS53</daobs:name>
+    <daobs:url>http://api.isogeo.com/services/csw/s/029547d707c94fab9f27210584a1016a/c/eb61f222f4e4431e92b85e9557858613/FVQXEfeoDlHFVB-KbeqVHKKPpZiF0/GetRecords</daobs:url>
+    <daobs:nbOfRecordsPerPage>200</daobs:nbOfRecordsPerPage>
+  </daobs:harvester>
+  <daobs:harvester>
+    <daobs:uuid>51615</daobs:uuid>
+    <daobs:territory>INPN(MNHN)</daobs:territory>
+    <daobs:folder>INPN(MNHN)</daobs:folder>
+    <daobs:name>INPN (MNHN)</daobs:name>
+    <daobs:url>http://inpn2bis.mnhn.fr/geosource/srv/fre/csw?</daobs:url>
+    <daobs:nbOfRecordsPerPage>200</daobs:nbOfRecordsPerPage>
+  </daobs:harvester>
+  <daobs:harvester>
+    <daobs:uuid>51586</daobs:uuid>
+    <daobs:territory>METACSW</daobs:territory>
+    <daobs:folder>METACSW</daobs:folder>
+    <daobs:name>metacsw</daobs:name>
+    <daobs:url>http://www.mongeosource.fr/geosource/1262/fre/csw?</daobs:url>
+    <daobs:nbOfRecordsPerPage>200</daobs:nbOfRecordsPerPage>
+  </daobs:harvester>
+  <daobs:harvester>
+    <daobs:uuid>51426</daobs:uuid>
+    <daobs:territory>GEOLIMOUSIN</daobs:territory>
+    <daobs:folder>GEOLIMOUSIN</daobs:folder>
+    <daobs:name>Geolimousin</daobs:name>
+    <daobs:url>http://catalogue.geolimousin.fr/geonetwork/srv/fre/csw-geolimousin?</daobs:url>
+    <daobs:nbOfRecordsPerPage>200</daobs:nbOfRecordsPerPage>
+  </daobs:harvester>
+  <daobs:harvester>
+    <daobs:uuid>51617</daobs:uuid>
+    <daobs:territory>ATLASANTE-GUYANE</daobs:territory>
+    <daobs:folder>ATLASANTE-GUYANE</daobs:folder>
+    <daobs:name>Atlasante - guyane</daobs:name>
+    <daobs:url>http://www.atlasante.fr/geonetwork/srv/fre/csw-geoguyane?</daobs:url>
+    <daobs:nbOfRecordsPerPage>200</daobs:nbOfRecordsPerPage>
+  </daobs:harvester>
+  <daobs:harvester>
+    <daobs:uuid>51447</daobs:uuid>
+    <daobs:territory>CARMEN</daobs:territory>
+    <daobs:folder>CARMEN</daobs:folder>
+    <daobs:name>carmen</daobs:name>
+    <daobs:url>http://metadata.carmencarto.fr/geosource/13/fre/csw?</daobs:url>
+    <daobs:nbOfRecordsPerPage>200</daobs:nbOfRecordsPerPage>
+  </daobs:harvester>
+  <daobs:harvester>
+    <daobs:uuid>51443</daobs:uuid>
+    <daobs:territory>GEOSOURCE</daobs:territory>
+    <daobs:folder>GEOSOURCE</daobs:folder>
+    <daobs:name>GEOSOURCE</daobs:name>
+    <daobs:url>http://metadata.carmencarto.fr/geosource/17/fre/csw?</daobs:url>
+    <daobs:nbOfRecordsPerPage>200</daobs:nbOfRecordsPerPage>
+  </daobs:harvester>
+  <daobs:harvester>
+    <daobs:uuid>51584</daobs:uuid>
+    <daobs:territory>LABEX</daobs:territory>
+    <daobs:folder>LABEX</daobs:folder>
+    <daobs:name>LabEx</daobs:name>
+    <daobs:url>http://ccwbvps01.in2p3.fr:8080/geonetwork/srv/fre/csw?</daobs:url>
+    <daobs:nbOfRecordsPerPage>200</daobs:nbOfRecordsPerPage>
+  </daobs:harvester>
+  <daobs:harvester>
+    <daobs:uuid>51587</daobs:uuid>
+    <daobs:territory>CD90</daobs:territory>
+    <daobs:folder>CD90</daobs:folder>
+    <daobs:name>CD90</daobs:name>
+    <daobs:url>http://api.isogeo.com/services/csw/s/284d2926f18845bfba7db0ce8ea9e908/c/faa09bf7be314181aa79f78dc3238992/bwT8suGFT2VkSZIJGKTfDPt_tYu80/GetRecords</daobs:url>
+    <daobs:nbOfRecordsPerPage>200</daobs:nbOfRecordsPerPage>
   </daobs:harvester>
 </daobs:harvesters>
