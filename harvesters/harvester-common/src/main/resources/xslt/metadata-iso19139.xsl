@@ -837,6 +837,9 @@
       <field name="{$role}Org{$fieldSuffix}">
         <xsl:value-of select="$organisationName"/>
       </field>
+      <field name="producerTerritory"><xsl:value-of select="$organisationName"/></field>
+      <field name="producerParent"><xsl:value-of select="$organisationName"/></field>
+      <field name="producerSynonym"><xsl:value-of select="$organisationName"/></field>
     </xsl:if>
     <field name="contact{$fieldSuffix}">{
       org:"<xsl:value-of
