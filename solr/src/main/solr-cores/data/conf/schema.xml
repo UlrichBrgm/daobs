@@ -261,6 +261,18 @@
   <dynamicField name="extra_medsea_*" type="managed_medsea" stored="true"
                 indexed="true" multiValued="true"/>
 
+  <!-- geocatalogue.fr fields -->
+  <field name="producerTerritory"
+         type="managed_geocat_producer_territory"
+         stored="true" indexed="true" multiValued="true"/>
+  <field name="producerParent"
+         type="managed_geocat_producer_parent"
+         stored="true" indexed="true" multiValued="true"/>
+  <field name="producerSynonym"
+         type="managed_geocat_producer_synonym"
+         stored="true" indexed="true" multiValued="true"/>
+
+
   <field name="isOpenData" type="boolean" stored="true" indexed="true"
          multiValued="false"/>
 
@@ -827,6 +839,43 @@
               ignoreCase="true"/>
     </analyzer>
   </fieldType>
+
+
+
+  <fieldType name="managed_geocat_producer_territory"
+             class="solr.TextField"
+             termVectors="false"
+             positionIncrementGap="100">
+    <analyzer>
+      <tokenizer class="solr.KeywordTokenizerFactory"/>
+      <filter class="solr.LowerCaseFilterFactory"/>
+      <filter class="solr.ManagedSynonymFilterFactory"
+              managed="geocat_producer_territory"/>
+    </analyzer>
+  </fieldType>
+  <fieldType name="managed_geocat_producer_parent"
+             class="solr.TextField"
+             termVectors="false"
+             positionIncrementGap="100">
+    <analyzer>
+      <tokenizer class="solr.KeywordTokenizerFactory"/>
+      <filter class="solr.LowerCaseFilterFactory"/>
+      <filter class="solr.ManagedSynonymFilterFactory"
+              managed="geocat_producer_broader"/>
+    </analyzer>
+  </fieldType>
+  <fieldType name="managed_geocat_producer_synonym"
+             class="solr.TextField"
+             termVectors="false"
+             positionIncrementGap="100">
+    <analyzer>
+      <tokenizer class="solr.KeywordTokenizerFactory"/>
+      <filter class="solr.LowerCaseFilterFactory"/>
+      <filter class="solr.ManagedSynonymFilterFactory"
+              managed="geocat_producer_synonym"/>
+    </analyzer>
+  </fieldType>
+
 
   <!-- A general text field that has reasonable, generic
        cross-language defaults: it tokenizes with StandardTokenizer,
