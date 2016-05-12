@@ -23,6 +23,14 @@
                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
                   xsi:noNamespaceSchemaLocation="../../daobsHarvesterConfig.xsd">
   <daobs:harvester>
+    <daobs:uuid>3f25ac7a-35fa-4a38-ae8b-68f05c8967aa</daobs:uuid>
+    <daobs:territory>FR</daobs:territory>
+    <daobs:folder>FR</daobs:folder>
+    <daobs:name>Geocatalogue Catalogue Server INSPIRE (BRGM)</daobs:name>
+    <daobs:url>http://www.geocatalogue.fr/api-public/inspire/servicesRest</daobs:url>
+    <daobs:nbOfRecordsPerPage>200</daobs:nbOfRecordsPerPage>
+  </daobs:harvester>
+  <daobs:harvester>
     <daobs:uuid>1412</daobs:uuid>
     <daobs:territory>GEONORMANDIE</daobs:territory>
     <daobs:folder>GEONORMANDIE</daobs:folder>
