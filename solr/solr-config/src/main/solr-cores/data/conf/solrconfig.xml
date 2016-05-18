@@ -475,6 +475,9 @@
   <updateRequestProcessorChain name="urpc" default="true">
     <processor class="org.apache.solr.update.processor.UniqFieldsUpdateProcessorFactory">
       <arr name="fieldName">
+        <str>producerTerritory</str>
+        <str>producerParent</str>
+        <str>producerSynonym</str>
         <str>codelist_type</str>
         <str>codelist_DCP</str>
         <str>linkProtocol</str>
