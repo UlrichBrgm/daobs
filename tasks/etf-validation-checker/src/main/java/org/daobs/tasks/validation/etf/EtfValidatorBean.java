@@ -27,7 +27,9 @@ import org.apache.commons.logging.LogFactory;
 import org.w3c.dom.Document;
 
 import java.io.ByteArrayInputStream;
+import java.net.URL;
 import java.nio.charset.StandardCharsets;
+import java.nio.file.Paths;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -45,6 +47,16 @@ public class EtfValidatorBean {
   String etfResourceTesterHtmlReportsPath;
   String etfResourceTesterHtmlReportsUrl;
   private Log log = LogFactory.getLog(this.getClass());
+
+  public int getTimeout() {
+    return timeout;
+  }
+
+  public void setTimeout(int timeout) {
+    this.timeout = timeout;
+  }
+
+  private int timeout = 1;
 
   public String getEtfResourceTesterPath() {
     return etfResourceTesterPath;
@@ -80,10 +92,7 @@ public class EtfValidatorBean {
     String xml = exchange.getIn().getBody(String.class);
 
     EtfValidationReport report = null;
-    EtfValidatorClient validatorClient =
-        new EtfValidatorClient(this.etfResourceTesterPath,
-          this.etfResourceTesterHtmlReportsPath,
-          this.etfResourceTesterHtmlReportsUrl);
+
 
     try {
       DocumentBuilderFactory factory =
@@ -95,7 +104,19 @@ public class EtfValidatorBean {
 
       XPath xpath = XPathFactory.newInstance().newXPath();
 
-      String expression = "/doc/arr[@name='serviceType']/str";
+      String expression = "/doc/str[@name='harvesterUuid']";
+      String harvesterUuid =
+          (String) xpath.compile(expression).evaluate(doc, XPathConstants.STRING);
+
+      String reportPath = Paths.get(this.etfResourceTesterHtmlReportsPath,
+          harvesterUuid).toString();
+
+      String reportUrl =  this.etfResourceTesterHtmlReportsUrl + "/" + harvesterUuid;
+
+      final EtfValidatorClient validatorClient =
+          new EtfValidatorClient(this.etfResourceTesterPath, reportPath, reportUrl, timeout);
+
+      expression = "/doc/arr[@name='serviceType']/str";
       String serviceType = (String) xpath.compile(expression).evaluate(doc, XPathConstants.STRING);
 
       expression = "/doc/arr[@name='linkUrl']/str";
@@ -104,6 +125,7 @@ public class EtfValidatorBean {
       expression = "/doc/arr[@name='linkProtocol']/str";
       String declaredProtocol =
           (String) xpath.compile(expression).evaluate(doc, XPathConstants.STRING);
+
 
       report = validatorClient.validate(url, ServiceType.fromString(serviceType), declaredProtocol);
 

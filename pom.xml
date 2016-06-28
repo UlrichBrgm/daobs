@@ -321,6 +321,13 @@
         <artifactId>daobs-routing-utility</artifactId>
         <version>${project.version}</version>
       </dependency>
+
+      <!-- compress -->
+      <dependency>
+        <groupId>org.apache.commons</groupId>
+        <artifactId>commons-compress</artifactId>
+        <version>1.7</version>
+      </dependency>
     </dependencies>
   </dependencyManagement>
 
@@ -441,7 +448,7 @@
     <module>harvesters</module>
     <module>tasks</module>
     <module>solr</module>
-    <module>dashboard2</module>
+    <module>dashboard</module>
     <module>silk</module>
     <module>web</module>
     <module>messaging</module>
@@ -474,6 +481,8 @@
 
     <!-- root.dir set by directory-maven-plugin -->
     <data.dir>${root.dir}/web/target/${war.name}/WEB-INF/datadir</data.dir>
+
+    <dashboard.default>INSPIRE%20Indicator%20trends</dashboard.default>
 
     <log.dir>/tmp</log.dir>
     <!--<log.dir>${catalina.home}/logs</log.dir>-->
@@ -521,11 +530,12 @@
     <solr.core.data>data</solr.core.data>
     <solr.core.dashboard>dashboard</solr.core.dashboard>
 
-    <solr.version>5.3.1</solr.version>
+    <solr.version>6.0.1</solr.version>
+    <solr.version.md5>fc9a4a6ee127dff21135dd4941c92c15</solr.version.md5>
 
     <etf.installation.path>${project.basedir}/../tasks/etf-validation-checker/ETF/ETF</etf.installation.path>
     <!-- web folder where to store the validation reports -->
-    <etf.validation-html-reports.path>${project.basedir}/target/${war.name}/etf-validation-reports</etf.validation-html-reports.path>
+    <etf.validation-html-reports.path>${data.dir}/etf-validation-reports</etf.validation-html-reports.path>
     <!--url where to store the validation reports -->
     <etf.validation-html-reports.url>${webapp.url}${webapp.rootUrl}etf-validation-reports</etf.validation-html-reports.url>
 
@@ -562,6 +572,8 @@
     <java.version>1.8</java.version>
 
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
+    <repository>https://github.com/INSPIRE-MIF/daobs</repository>
   </properties>
 
   <profiles>

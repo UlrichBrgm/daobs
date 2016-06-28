@@ -27,6 +27,9 @@
   var solrContext = '/${solr.webapp.name}';
 
   app.constant('cfg', {
+    'repository': '${repository}',
+    'version': '${buildNumber}',
+    'defaultDashboard': '${dashboard.default}',
     'SERVICES': {
       root: context,
       solrRoot: solrContext,
@@ -43,7 +46,7 @@
       reportingConfig: api + 'reports.json',
       reports: api + 'reports',
       samples: api + 'samples',
-      dashboardBaseURL: context + 'dashboard2/#/dashboard/solr/',
+      dashboardBaseURL: context + 'dashboard/#/dashboard/solr/',
       eftValidation: api + 'validate/etf'
     }
   });

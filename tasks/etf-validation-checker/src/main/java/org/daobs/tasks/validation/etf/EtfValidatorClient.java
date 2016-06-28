@@ -28,8 +28,11 @@ import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
@@ -40,6 +43,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Simple Java Client for the ETF Validator Tool.
@@ -52,16 +56,28 @@ public class EtfValidatorClient {
   String etfResourceTesterHtmlReportsUrl;
   private Log log = LogFactory.getLog(this.getClass());
 
+  public int getTimeout() {
+    return timeout;
+  }
+
+  public void setTimeout(int timeout) {
+    this.timeout = timeout;
+  }
+
+  private int timeout = 1;
+
   /**
    * ETF validator client.
      */
   public EtfValidatorClient(String etfResourceTesterPath,
                             String etfResourceTesterHtmlReportsPath,
-                            String etfResourceTesterHtmlReportsUrl) {
+                            String etfResourceTesterHtmlReportsUrl,
+                            int timeout) {
 
     this.etfResourceTesterPath = etfResourceTesterPath;
     this.etfResourceTesterHtmlReportsPath = etfResourceTesterHtmlReportsPath;
     this.etfResourceTesterHtmlReportsUrl = etfResourceTesterHtmlReportsUrl;
+    this.timeout = timeout;
   }
 
   public String getEtfResourceTesterPath() {
@@ -140,6 +156,13 @@ public class EtfValidatorClient {
           .build(eftResults, resourceDescriptorUrl, protocol, reportUrl);
 
       return report;
+
+    } catch (EtfValidatorClientException ex) {
+      EtfValidationReport report = new EftValidationReportBuilder()
+          .buildErrorReport(resourceDescriptorUrl, ex.getMessage());
+
+      return report;
+
     } finally {
       // Cleanup report from ETF folder
       if (StringUtils.isNotEmpty(eftResultsPath)) {
@@ -149,10 +172,12 @@ public class EtfValidatorClient {
   }
 
   private String executeEtfTool(String resourceDescriptorUrl,
-                                ServiceProtocol protocol) {
+                                ServiceProtocol protocol) throws EtfValidatorClientException {
 
     String reportName = getReportName();
     Path tmpDir = null;
+    StreamLogger errorLogger = null;
+    StreamLogger outputLogger = null;
 
     try {
       // Create a custom config.properties and temporary directory,
@@ -180,35 +205,25 @@ public class EtfValidatorClient {
           new File(this.etfResourceTesterPath));
 
       if (log.isDebugEnabled()) {
-        // Log process ouput
-        BufferedReader bfr = null;
-        String line = "";
+        errorLogger = new
+            StreamLogger(pr.getErrorStream(), this.log);
 
-        try {
-          bfr = new BufferedReader(new InputStreamReader(
-              pr.getInputStream(), Charset.forName("UTF8")));
-          while ((line = bfr.readLine()) != null) {
-            log.debug(line);
-          }
+        outputLogger = new
+            StreamLogger(pr.getInputStream(), this.log);
 
-        } finally {
-          IOUtils.closeQuietly(bfr);
-        }
-
-        try {
-          bfr = new BufferedReader(new InputStreamReader(
-              pr.getErrorStream(), Charset.forName("UTF8")));
-          line = "";
-          while ((line = bfr.readLine()) != null) {
-            log.debug(line);
-          }
-        } finally {
-          IOUtils.closeQuietly(bfr);
-        }
-
+        errorLogger.start();
+        outputLogger.start();
       }
 
-      int exitVal = pr.waitFor();
+      if (!pr.waitFor(timeout, TimeUnit.MINUTES)) {
+        pr.destroy(); // consider using destroyForcibly instead
+
+        String msg = String.format("Process killed after %d minutes.", timeout);
+        log.warn(msg);
+        throw new EtfValidatorClientException(msg);
+      }
+
+      int exitVal = pr.exitValue();
       log.info("Process exitValue: " + exitVal);
 
       String eftResultsPath = this.etfResourceTesterPath + "/reports/" + reportName;
@@ -219,6 +234,10 @@ public class EtfValidatorClient {
 
       return eftResultsPath;
 
+    } catch (EtfValidatorClientException ex) {
+      log.error(ex.getMessage());
+      throw ex;
+
     } catch (Throwable ex) {
       log.error(ex.getMessage());
       return "";
@@ -226,6 +245,16 @@ public class EtfValidatorClient {
     } finally {
       // Clean up temporary folders
       cleanTemporaryFolders(reportName, tmpDir);
+
+      if (log.isDebugEnabled()) {
+        if ((errorLogger != null) && (errorLogger.isAlive())) {
+          errorLogger.interrupt();
+        }
+
+        if ((outputLogger != null) && (outputLogger.isAlive())) {
+          outputLogger.interrupt();
+        }
+      }
     }
 
   }
@@ -295,4 +324,5 @@ public class EtfValidatorClient {
         this.etfResourceTesterPath,
         "config-" + reportName + ".properties"));
   }
+
 }

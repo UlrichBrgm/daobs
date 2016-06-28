@@ -47,6 +47,8 @@
         return userService.getUser();
       };
 
+      $scope.config = cfg;
+
       $scope.navLinks = [{
         id: 'home',
         icon: 'fa-home',
@@ -57,7 +59,7 @@
         icon: 'fa-bar-chart',
         // TODO: Should be displayed only if dashboard available
         // TODO: Should point to a dashboard that exist
-        url: 'dashboard2/#/dashboard/solr/INSPIRE%20Indicator%20trends',
+        url: cfg.dashboardBaseURL + cfg.defaultDashboard,
         needsLogin: false
       }, {
         id: 'monitoring',
