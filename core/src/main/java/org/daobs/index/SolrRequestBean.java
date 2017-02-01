@@ -60,6 +60,7 @@ public class SolrRequestBean {
   public static Node query(String collection, String query) {
     try {
       SolrServerBean serverBean = SolrServerBean.get();
+     /* UCN
       URL url = new URL(serverBean.getSolrServerUrl() + collection + query);
       String xmlResponse = IOUtils.toString(url, "UTF-8");
       DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
@@ -68,6 +69,17 @@ public class SolrRequestBean {
           new ByteArrayInputStream(
               xmlResponse.getBytes("UTF-8")));
       return builder.parse(is).getFirstChild();
+      */
+      String serverUrl = serverBean.getSolrServerUrl() + (
+        serverBean.getSolrServerUrl().endsWith("/") ? "" : "/");
+      URL url = new URL(serverUrl + collection + query);
+      String xmlResponse = IOUtils.toString(url, "UTF-8");
+      DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+      DocumentBuilder builder = factory.newDocumentBuilder();
+      InputSource is = new InputSource(
+          new ByteArrayInputStream(
+              xmlResponse.getBytes("UTF-8")));
+return builder.parse(is).getFirstChild();
     } catch (Exception exception) {
       exception.printStackTrace();
     }
